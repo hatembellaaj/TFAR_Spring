@@ -1,11 +1,8 @@
 package tn.mdweb.dsi.tfar.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -31,6 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         // @formatter:off
         http
+        	.cors().and()
             .csrf()
             .disable()
             .exceptionHandling()
@@ -53,7 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/api/authenticate").permitAll()
             .antMatchers("/api/admin/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/api/**").authenticated()
+            .antMatchers("/api/**").permitAll()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/health/**").permitAll()
             .antMatchers("/management/info").permitAll()
