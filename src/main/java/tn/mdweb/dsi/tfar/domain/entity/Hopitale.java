@@ -1,5 +1,6 @@
 package tn.mdweb.dsi.tfar.domain.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,52 +15,52 @@ public class Hopitale {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Code_hopitale;
+	@Column(name="code_hopitale")
+	private Long code_hopitale;
 	
 	
 	@NotNull
-	private String Nom_Hopitale;
+	@Column(name="nom_Hopitale")
+	private String nom_Hopitale;
 
 
 	public Hopitale() {  }
 
 
 	public Hopitale(@NotNull String nom_Hopitale) {
-		Nom_Hopitale = nom_Hopitale;
+		this.nom_Hopitale= nom_Hopitale;
 	}
 
 
 	public Hopitale(Long code_hopitale, @NotNull String nom_Hopitale) {
-		Code_hopitale = code_hopitale;
-		Nom_Hopitale = nom_Hopitale;
+		this.code_hopitale = code_hopitale;
+		this.nom_Hopitale = nom_Hopitale;
 	}
 
 
-
-
 	public Long getCode_hopitale() {
-		return Code_hopitale;
+		return code_hopitale;
 	}
 
 
 	public void setCode_hopitale(Long code_hopitale) {
-		Code_hopitale = code_hopitale;
+		this.code_hopitale = code_hopitale;
 	}
 
 
 	public String getNom_Hopitale() {
-		return Nom_Hopitale;
+		return nom_Hopitale;
 	}
 
 
 	public void setNom_Hopitale(String nom_Hopitale) {
-		Nom_Hopitale = nom_Hopitale;
+		this.nom_Hopitale = nom_Hopitale;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Hopitale [Code_hopitale=" + Code_hopitale + ", Nom_Hopitale=" + Nom_Hopitale + "]";
+		return "Hopitale [code_hopitale=" + code_hopitale + ", nom_Hopitale=" + nom_Hopitale + "]";
 	}
 
 
@@ -67,8 +68,8 @@ public class Hopitale {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Code_hopitale == null) ? 0 : Code_hopitale.hashCode());
-		result = prime * result + ((Nom_Hopitale == null) ? 0 : Nom_Hopitale.hashCode());
+		result = prime * result + ((code_hopitale == null) ? 0 : code_hopitale.hashCode());
+		result = prime * result + ((nom_Hopitale == null) ? 0 : nom_Hopitale.hashCode());
 		return result;
 	}
 
@@ -82,21 +83,23 @@ public class Hopitale {
 		if (getClass() != obj.getClass())
 			return false;
 		Hopitale other = (Hopitale) obj;
-		if (Code_hopitale == null) {
-			if (other.Code_hopitale != null)
+		if (code_hopitale == null) {
+			if (other.code_hopitale != null)
 				return false;
-		} else if (!Code_hopitale.equals(other.Code_hopitale))
+		} else if (!code_hopitale.equals(other.code_hopitale))
 			return false;
-		if (Nom_Hopitale == null) {
-			if (other.Nom_Hopitale != null)
+		if (nom_Hopitale == null) {
+			if (other.nom_Hopitale != null)
 				return false;
-		} else if (!Nom_Hopitale.equals(other.Nom_Hopitale))
+		} else if (!nom_Hopitale.equals(other.nom_Hopitale))
 			return false;
 		return true;
 	}
+
+
+
 	
-	
-	
+
 	
 	
 	

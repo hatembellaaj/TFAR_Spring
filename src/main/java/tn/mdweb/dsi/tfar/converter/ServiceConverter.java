@@ -12,8 +12,8 @@ public class ServiceConverter {
 	
 	public ServiceDto entityToDto(Service1 service) {
 		ServiceDto serviceDto = new ServiceDto();
-		serviceDto.setCode_Service(service.getCode_Service());
-		serviceDto.setNom_Service(service.getNom_Service());
+		serviceDto.setCode_service(service.getCode_service());
+		serviceDto.setNom_service(service.getNom_service());
 		return serviceDto;
 	}
 
@@ -25,8 +25,8 @@ public class ServiceConverter {
 
 	public Service1 dtoToEntity(ServiceDto serviceDto) {
 		Service1 service = new Service1();
-		service.setCode_Service(serviceDto.getCode_Service());
-		service.setNom_Service(serviceDto.getNom_Service());
+		service.setCode_service(serviceDto.getCode_service());
+		service.setNom_service(serviceDto.getNom_service());
 		return service;
 
 	}

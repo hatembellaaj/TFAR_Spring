@@ -1,5 +1,6 @@
 package tn.mdweb.dsi.tfar.domain.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,50 +14,52 @@ public class Service1 {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Code_Service;
+	@Column(name="code_service")
+	private Long code_service;
 	
 	@NotNull
-	private String Nom_Service;
+	@Column(name="nom_service")
+	private String nom_service;
 
 	public Service1() {
 	}
 
+	public Long getCode_service() {
+		return code_service;
+	}
+
+	public void setCode_service(Long code_service) {
+		this.code_service = code_service;
+	}
+
+	public String getNom_service() {
+		return nom_service;
+	}
+
+	public void setNom_service(String nom_service) {
+		this.nom_service = nom_service;
+	}
+
 	public Service1(@NotNull String nom_Service) {
-		Nom_Service = nom_Service;
+		this.nom_service = nom_Service;
 	}
 
 	public Service1(Long code_Service, @NotNull String nom_Service) {
-		Code_Service = code_Service;
-		Nom_Service = nom_Service;
-	}
-
-	public Long getCode_Service() {
-		return Code_Service;
-	}
-
-	public void setCode_Service(Long code_Service) {
-		Code_Service = code_Service;
-	}
-
-	public String getNom_Service() {
-		return Nom_Service;
-	}
-
-	public void setNom_Service(String nom_Service) {
-		Nom_Service = nom_Service;
+		this.code_service = code_Service;
+		this.nom_service = nom_Service;
 	}
 
 	@Override
 	public String toString() {
-		return "Service1 [Code_Service=" + Code_Service + ", Nom_Service=" + Nom_Service + "]";
+		return "Service1 [code_service=" + code_service + ", nom_service=" + nom_service + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Code_Service == null) ? 0 : Code_Service.hashCode());
-		result = prime * result + ((Nom_Service == null) ? 0 : Nom_Service.hashCode());
+		result = prime * result + ((code_service == null) ? 0 : code_service.hashCode());
+		result = prime * result + ((nom_service == null) ? 0 : nom_service.hashCode());
 		return result;
 	}
 
@@ -69,18 +72,19 @@ public class Service1 {
 		if (getClass() != obj.getClass())
 			return false;
 		Service1 other = (Service1) obj;
-		if (Code_Service == null) {
-			if (other.Code_Service != null)
+		if (code_service == null) {
+			if (other.code_service != null)
 				return false;
-		} else if (!Code_Service.equals(other.Code_Service))
+		} else if (!code_service.equals(other.code_service))
 			return false;
-		if (Nom_Service == null) {
-			if (other.Nom_Service != null)
+		if (nom_service == null) {
+			if (other.nom_service != null)
 				return false;
-		} else if (!Nom_Service.equals(other.Nom_Service))
+		} else if (!nom_service.equals(other.nom_service))
 			return false;
 		return true;
 	}
+
 	
 	
 
