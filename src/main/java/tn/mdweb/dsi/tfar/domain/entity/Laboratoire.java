@@ -9,36 +9,32 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "service")
-public class Service1 {
+@Table(name = "laboratoire")
+public class Laboratoire {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="code")
-	private Long code;
-	
+	@Column(name = "id")
+	private Long id;
+
 	@NotNull
-	@Column(name="nom")
+	@Column(name = "nom")
 	private String nom;
 
-	public Service1() {
+	public Laboratoire() {
 	}
 
-	public Service1(Long code, @NotNull String nom) {
-		this.code = code;
+	public Laboratoire(Long id, @NotNull String nom) {
+		this.id = id;
 		this.nom = nom;
 	}
-	
-	public Service1(Long code) {
-		this.code = code;
+
+	public Long getId() {
+		return id;
 	}
 
-	public Long getCode() {
-		return code;
-	}
-
-	public void setCode(Long code) {
-		this.code = code;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNom() {
@@ -51,14 +47,14 @@ public class Service1 {
 
 	@Override
 	public String toString() {
-		return "Service1 [code=" + code + ", nom=" + nom + "]";
+		return "Laboratoire [id=" + id + ", nom=" + nom + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		return result;
 	}
@@ -71,11 +67,11 @@ public class Service1 {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Service1 other = (Service1) obj;
-		if (code == null) {
-			if (other.code != null)
+		Laboratoire other = (Laboratoire) obj;
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!code.equals(other.code))
+		} else if (!id.equals(other.id))
 			return false;
 		if (nom == null) {
 			if (other.nom != null)
@@ -86,8 +82,8 @@ public class Service1 {
 	}
 	
 	
-
+	
+	
 	
 
-	
 }

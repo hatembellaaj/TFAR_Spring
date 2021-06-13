@@ -1,29 +1,25 @@
 package tn.mdweb.dsi.tfar.domain.dto;
 
-import java.io.Serializable;
+public class LaboratoireDto {
 
-public class ServiceDto implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
-	private Long code;
+	private Long id;
 
 	private String nom;
 
-	public ServiceDto() {
+	public LaboratoireDto() {
 	}
 
-	public ServiceDto(Long code, String nom) {
-		this.code = code;
+	public LaboratoireDto(Long id, String nom) {
+		this.id = id;
 		this.nom = nom;
 	}
 
-	public Long getCode() {
-		return code;
+	public Long getId() {
+		return id;
 	}
 
-	public void setCode(Long code) {
-		this.code = code;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNom() {
@@ -33,19 +29,17 @@ public class ServiceDto implements Serializable {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
-	
 
 	@Override
 	public String toString() {
-		return "ServiceDto [code=" + code + ", nom=" + nom + "]";
+		return "LaboratoireDto [id=" + id + ", nom=" + nom + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		return result;
 	}
@@ -58,11 +52,11 @@ public class ServiceDto implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ServiceDto other = (ServiceDto) obj;
-		if (code == null) {
-			if (other.code != null)
+		LaboratoireDto other = (LaboratoireDto) obj;
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!code.equals(other.code))
+		} else if (!id.equals(other.id))
 			return false;
 		if (nom == null) {
 			if (other.nom != null)
@@ -71,8 +65,6 @@ public class ServiceDto implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 	
 	
 

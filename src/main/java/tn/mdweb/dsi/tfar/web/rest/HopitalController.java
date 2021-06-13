@@ -13,83 +13,63 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 //import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import tn.mdweb.dsi.tfar.converter.HopitaleConverter;
-import tn.mdweb.dsi.tfar.domain.dto.HopitaleDto;
-import tn.mdweb.dsi.tfar.domain.entity.Hopitale;
-import tn.mdweb.dsi.tfar.service.HopitaleService;
+import tn.mdweb.dsi.tfar.converter.HopitalConverter;
+import tn.mdweb.dsi.tfar.domain.dto.HopitalDto;
+import tn.mdweb.dsi.tfar.domain.entity.Hopital;
+import tn.mdweb.dsi.tfar.service.HopitalService;
 
 @RestController
-@RequestMapping("/api/hopitaleDtos")
-public class HopitaleController {
+@RequestMapping("/api/hopitalDtos")
+public class HopitalController {
 
 	@Autowired
-	private HopitaleService hopitaleService;
+	private HopitalService hopitalService;
 
 	@Autowired
-	private HopitaleConverter hopitaleConverter;
+	private HopitalConverter hopitalConverter;
 
-	// get all hopitaleDtos
+	// get all hopitalDtos
 	@GetMapping("/findAll")
-	public List<HopitaleDto> getAllHopitaleDtos() {
-
-		List<Hopitale> findAll = hopitaleService.listAll();
-		return hopitaleConverter.entityToDto(findAll);
+	public List<HopitalDto> getAllHopitalDtos() {
+		List<Hopital> findAll = hopitalService.listAll();
+		return hopitalConverter.entityToDto(findAll);
 	}
 
-	// get hopitaleDto by Code_hopitale
-	@GetMapping("/find/{Code_hopitale}")
-	public HopitaleDto getHopitaleDtoById(@PathVariable(value = "Code_hopitale") long id) {
-		Hopitale hopitale = hopitaleService.get(id);
-		return hopitaleConverter.entityToDto(hopitale);
+	// get hopitalDto by code
+	@GetMapping("/find/{code}")
+	public HopitalDto getHopitaleDtoById(@PathVariable(value = "code") long id) {
+		Hopital hopitale = hopitalService.get(id);
+		return hopitalConverter.entityToDto(hopitale);
 	}
 
-	// create hopitale
+	// create hopital
 	@PostMapping("/save")
-	public HopitaleDto save(@RequestBody HopitaleDto hopitaleDto) {
-		Hopitale hopitale = hopitaleConverter.dtoToEntity(hopitaleDto);
-		hopitale = hopitaleService.save(hopitale);
-		return hopitaleConverter.entityToDto(hopitale);
+	public HopitalDto save(@RequestBody HopitalDto hopitaleDto) {
+		Hopital hopitale = hopitalConverter.dtoToEntity(hopitaleDto);
+		hopitale = hopitalService.save(hopitale);
+		return hopitalConverter.entityToDto(hopitale);
 	}
 
-	/*
-	// update hopitale
-	@PutMapping("/save/{Code_hopitale}")
-	public HopitaleDto updateHopitale(@RequestBody HopitaleDto hopitaleDto, @PathVariable("Code_hopitale") long id) {
-		Hopitale hopitale = hopitaleConverter.dtoToEntity(hopitaleDto);
-		Hopitale existinghopitale = hopitaleService.get(id);
-		existinghopitale.setNom_Hopitale(hopitale.getNom_Hopitale());
-		existinghopitale = hopitaleService.save(existinghopitale);
-		return hopitaleConverter.entityToDto(existinghopitale);
+	// update hopital
+	@PutMapping("/save/{code}")
+	public HopitalDto updateHopitale(@RequestBody HopitalDto hopitalDto, @PathVariable("code") long id) {
+		Hopital existinghopital = hopitalService.get(id);
+		existinghopital.setNom(hopitalDto.getNom());
+		existinghopital.setAdresse(hopitalDto.getAdresse());
+		existinghopital.setTel(hopitalDto.getTel());
+		existinghopital.setContact(hopitalDto.getContact());
+		existinghopital.setEmail(hopitalDto.getEmail());
+		existinghopital = hopitalService.save(existinghopital);
+		return hopitalConverter.entityToDto(existinghopital);
 	}
-	*/
-	
-	// update hopitale
-		@PutMapping("/save/{Code_hopitale}")
-		public HopitaleDto updateHopitale(@RequestBody HopitaleDto hopitaleDto, @PathVariable("Code_hopitale") long id) {
-			Hopitale existinghopitale = hopitaleService.get(id);
-			existinghopitale.setNom_Hopitale(hopitaleDto.getNom_Hopitale());
-			existinghopitale = hopitaleService.save(existinghopitale);
-			return hopitaleConverter.entityToDto(existinghopitale);
-		}
-		
-/*
-	// delete hopitale by Code_hopitale
-	@DeleteMapping("delete/{Code_hopitale}")
-	public String deleteHopitale(@PathVariable("Code_hopitale") long id) {
-		Hopitale existinghopitale = hopitaleService.get(id);
-		HopitaleDto hopitaleDto= hopitaleConverter.entityToDto(existinghopitale);
-		hopitaleService.delete(id);
-		return hopitaleDto.toString()+" "+"is deleted";
+
+
+	// delete hopital by code
+	@DeleteMapping("delete/{code}")
+	public String deleteHopital(@PathVariable("code") long id) {
+		Hopital existinghopital = hopitalService.get(id);
+		hopitalService.delete(id);
+		return existinghopital.toString() + " " + "is deleted";
 	}
-	*/
-		
-	// delete hopitale by Code_hopitale
-		@DeleteMapping("delete/{Code_hopitale}")
-		public String deleteHopitale(@PathVariable("Code_hopitale") long id) {
-			Hopitale existinghopitale = hopitaleService.get(id);
-			hopitaleService.delete(id);
-			return existinghopitale.toString()+" "+"is deleted";
-		}
-		
 
 }

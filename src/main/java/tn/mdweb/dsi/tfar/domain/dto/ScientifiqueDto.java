@@ -1,167 +1,153 @@
 package tn.mdweb.dsi.tfar.domain.dto;
 
-import java.sql.Blob;
+import tn.mdweb.dsi.tfar.domain.entity.Universite;
 
 public class ScientifiqueDto {
 
-	private Long code_sc;
+	private Long code;
 
-	private String nom_sc;
+	private String nom;
 
-	private String prenom_sc;
+	private String prenom;
 
-	private String service_sc;
+	private String service;
 
-	private String centre_sc;
+	private String centre;
 
-	private String adresse_sc;
+	private String adresse;
 
-	private String tel_sc;
+	private String tel;
 
-	private String email_sc;
+	private String email;
 
-	private Blob photo_sc;
+	private String photo;
 
-	private String type_sc;
+	private String type;
 
-	private String login_sc;
+	private String login;
 
-	private String passwd_sc;
+	private String password;
 
 	private String url;
+	
+	private Universite universite;
 
 	public ScientifiqueDto() {
 	}
 
-	public ScientifiqueDto(String nom_sc, String prenom_sc, String service_sc, String centre_sc, String adresse_sc,
-			String tel_sc, String email_sc, Blob photo_sc, String type_sc, String login_sc, String passwd_sc,
-			String url) {
-		this.nom_sc = nom_sc;
-		this.prenom_sc = prenom_sc;
-		this.service_sc = service_sc;
-		this.centre_sc = centre_sc;
-		this.adresse_sc = adresse_sc;
-		this.tel_sc = tel_sc;
-		this.email_sc = email_sc;
-		this.photo_sc = photo_sc;
-		this.type_sc = type_sc;
-		this.login_sc = login_sc;
-		this.passwd_sc = passwd_sc;
+	public ScientifiqueDto(Long code, String nom, String prenom, String service, String centre, String adresse,
+			String tel, String email, String photo, String type, String login, String password, String url,
+			Universite universite) {
+		this.code = code;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.service = service;
+		this.centre = centre;
+		this.adresse = adresse;
+		this.tel = tel;
+		this.email = email;
+		this.photo = photo;
+		this.type = type;
+		this.login = login;
+		this.password = password;
 		this.url = url;
+		this.universite = universite;
 	}
 
-	public ScientifiqueDto(Long code_sc, String nom_sc, String prenom_sc, String service_sc, String centre_sc,
-			String adresse_sc, String tel_sc, String email_sc, Blob photo_sc, String type_sc, String login_sc,
-			String passwd_sc, String url) {
-		this.code_sc = code_sc;
-		this.nom_sc = nom_sc;
-		this.prenom_sc = prenom_sc;
-		this.service_sc = service_sc;
-		this.centre_sc = centre_sc;
-		this.adresse_sc = adresse_sc;
-		this.tel_sc = tel_sc;
-		this.email_sc = email_sc;
-		this.photo_sc = photo_sc;
-		this.type_sc = type_sc;
-		this.login_sc = login_sc;
-		this.passwd_sc = passwd_sc;
-		this.url = url;
+	public Long getCode() {
+		return code;
 	}
 
-	public Long getCode_sc() {
-		return code_sc;
+	public void setCode(Long code) {
+		this.code = code;
 	}
 
-	public void setCode_sc(Long code_sc) {
-		this.code_sc = code_sc;
+	public String getNom() {
+		return nom;
 	}
 
-	public String getNom_sc() {
-		return nom_sc;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
-	public void setNom_sc(String nom_sc) {
-		this.nom_sc = nom_sc;
+	public String getPrenom() {
+		return prenom;
 	}
 
-	public String getPrenom_sc() {
-		return prenom_sc;
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
 
-	public void setPrenom_sc(String prenom_sc) {
-		this.prenom_sc = prenom_sc;
+	public String getService() {
+		return service;
 	}
 
-	public String getService_sc() {
-		return service_sc;
+	public void setService(String service) {
+		this.service = service;
 	}
 
-	public void setService_sc(String service_sc) {
-		this.service_sc = service_sc;
+	public String getCentre() {
+		return centre;
 	}
 
-	public String getCentre_sc() {
-		return centre_sc;
+	public void setCentre(String centre) {
+		this.centre = centre;
 	}
 
-	public void setCentre_sc(String centre_sc) {
-		this.centre_sc = centre_sc;
+	public String getAdresse() {
+		return adresse;
 	}
 
-	public String getAdresse_sc() {
-		return adresse_sc;
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
 	}
 
-	public void setAdresse_sc(String adresse_sc) {
-		this.adresse_sc = adresse_sc;
+	public String getTel() {
+		return tel;
 	}
 
-	public String getTel_sc() {
-		return tel_sc;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 
-	public void setTel_sc(String tel_sc) {
-		this.tel_sc = tel_sc;
+	public String getEmail() {
+		return email;
 	}
 
-	public String getEmail_sc() {
-		return email_sc;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public void setEmail_sc(String email_sc) {
-		this.email_sc = email_sc;
+	public String getPhoto() {
+		return photo;
 	}
 
-	public Blob getPhoto_sc() {
-		return photo_sc;
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
-	public void setPhoto_sc(Blob photo_sc) {
-		this.photo_sc = photo_sc;
+	public String getType() {
+		return type;
 	}
 
-	public String getType_sc() {
-		return type_sc;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public void setType_sc(String type_sc) {
-		this.type_sc = type_sc;
+	public String getLogin() {
+		return login;
 	}
 
-	public String getLogin_sc() {
-		return login_sc;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
-	public void setLogin_sc(String login_sc) {
-		this.login_sc = login_sc;
+	public String getPassword() {
+		return password;
 	}
 
-	public String getPasswd_sc() {
-		return passwd_sc;
-	}
-
-	public void setPasswd_sc(String passwd_sc) {
-		this.passwd_sc = passwd_sc;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getUrl() {
@@ -172,14 +158,127 @@ public class ScientifiqueDto {
 		this.url = url;
 	}
 
+	public Universite getUniversite() {
+		return universite;
+	}
+
+	public void setUniversite(Universite universite) {
+		this.universite = universite;
+	}
+
 	@Override
 	public String toString() {
-		return "ScientifiqueDto [code_sc=" + code_sc + ", nom_sc=" + nom_sc + ", prenom_sc=" + prenom_sc
-				+ ", service_sc=" + service_sc + ", centre_sc=" + centre_sc + ", adresse_sc=" + adresse_sc + ", tel_sc="
-				+ tel_sc + ", email_sc=" + email_sc + ", photo_sc=" + photo_sc + ", type_sc=" + type_sc + ", login_sc="
-				+ login_sc + ", passwd_sc=" + passwd_sc + ", url=" + url + "]";
+		return "ScientifiqueDto [code=" + code + ", nom=" + nom + ", prenom=" + prenom + ", service=" + service
+				+ ", centre=" + centre + ", adresse=" + adresse + ", tel=" + tel + ", email=" + email + ", photo="
+				+ photo + ", type=" + type + ", login=" + login + ", password=" + password + ", url=" + url
+				+ ", universite=" + universite + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((adresse == null) ? 0 : adresse.hashCode());
+		result = prime * result + ((centre == null) ? 0 : centre.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((photo == null) ? 0 : photo.hashCode());
+		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
+		result = prime * result + ((service == null) ? 0 : service.hashCode());
+		result = prime * result + ((tel == null) ? 0 : tel.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((universite == null) ? 0 : universite.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ScientifiqueDto other = (ScientifiqueDto) obj;
+		if (adresse == null) {
+			if (other.adresse != null)
+				return false;
+		} else if (!adresse.equals(other.adresse))
+			return false;
+		if (centre == null) {
+			if (other.centre != null)
+				return false;
+		} else if (!centre.equals(other.centre))
+			return false;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (login == null) {
+			if (other.login != null)
+				return false;
+		} else if (!login.equals(other.login))
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (photo == null) {
+			if (other.photo != null)
+				return false;
+		} else if (!photo.equals(other.photo))
+			return false;
+		if (prenom == null) {
+			if (other.prenom != null)
+				return false;
+		} else if (!prenom.equals(other.prenom))
+			return false;
+		if (service == null) {
+			if (other.service != null)
+				return false;
+		} else if (!service.equals(other.service))
+			return false;
+		if (tel == null) {
+			if (other.tel != null)
+				return false;
+		} else if (!tel.equals(other.tel))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		if (universite == null) {
+			if (other.universite != null)
+				return false;
+		} else if (!universite.equals(other.universite))
+			return false;
+		if (url == null) {
+			if (other.url != null)
+				return false;
+		} else if (!url.equals(other.url))
+			return false;
+		return true;
 	}
 	
+	
+
 	
 
 }

@@ -5,26 +5,26 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.mdweb.dsi.tfar.domain.entity.Hopitale;
-import tn.mdweb.dsi.tfar.repository.HopitaleRepository;
+import tn.mdweb.dsi.tfar.domain.entity.Hopital;
+import tn.mdweb.dsi.tfar.repository.HopitalRepository;
 
 @Service
-public class HopitaleService {
+public class HopitalService {
 	
 	@Autowired
-	private HopitaleRepository hopitaleRepository;
+	private HopitalRepository hopitaleRepository;
 	
 	
-	public List<Hopitale> listAll() {
+	public List<Hopital> listAll() {
 		return hopitaleRepository.findAll();	
 	}
 	
-	public Hopitale save(Hopitale hopitale) {
+	public Hopital save(Hopital hopitale) {
 		hopitaleRepository.save(hopitale);
 		return hopitale;
 	}
 	
-	public Hopitale get(long id) {
+	public Hopital get(long id) {
 		return hopitaleRepository.findById(id).get();
 	}
 	

@@ -9,70 +9,117 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table
-public class Hopitale {
-	
-	
+@Table(name = "hopital")
+public class Hopital {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="code_hopitale")
-	private Long code_hopitale;
-	
-	
+	@Column(name = "code")
+	private Long code;
+
 	@NotNull
-	@Column(name="nom_Hopitale")
-	private String nom_Hopitale;
+	@Column(name = "nom")
+	private String nom;
 
+	@NotNull
+	@Column(name = "adresse")
+	private String adresse;
 
-	public Hopitale() {  }
+	@NotNull
+	@Column(name = "tel")
+	private String tel;
 
+	@NotNull
+	@Column(name = "contact")
+	private String contact;
 
-	public Hopitale(@NotNull String nom_Hopitale) {
-		this.nom_Hopitale= nom_Hopitale;
+	@NotNull
+	@Column(name = "email")
+	private String email;
+
+	public Hopital() {
+	}
+	public Hopital(Long code) {
+		this.code = code;
 	}
 
+	public Hopital(Long code, @NotNull String nom, @NotNull String adresse, @NotNull String tel,
+			@NotNull String contact, @NotNull String email) {
 
-	public Hopitale(Long code_hopitale, @NotNull String nom_Hopitale) {
-		this.code_hopitale = code_hopitale;
-		this.nom_Hopitale = nom_Hopitale;
+		this.code = code;
+		this.nom = nom;
+		this.adresse = adresse;
+		this.tel = tel;
+		this.contact = contact;
+		this.email = email;
 	}
 
-
-	public Long getCode_hopitale() {
-		return code_hopitale;
+	public Long getCode() {
+		return code;
 	}
 
-
-	public void setCode_hopitale(Long code_hopitale) {
-		this.code_hopitale = code_hopitale;
+	public void setCode(Long code) {
+		this.code = code;
 	}
 
-
-	public String getNom_Hopitale() {
-		return nom_Hopitale;
+	public String getNom() {
+		return nom;
 	}
 
-
-	public void setNom_Hopitale(String nom_Hopitale) {
-		this.nom_Hopitale = nom_Hopitale;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	@Override
 	public String toString() {
-		return "Hopitale [code_hopitale=" + code_hopitale + ", nom_Hopitale=" + nom_Hopitale + "]";
+		return "Hopital [code=" + code + ", nom=" + nom + ", adresse=" + adresse + ", tel=" + tel + ", contact="
+				+ contact + ", email=" + email + "]";
 	}
-
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((code_hopitale == null) ? 0 : code_hopitale.hashCode());
-		result = prime * result + ((nom_Hopitale == null) ? 0 : nom_Hopitale.hashCode());
+		result = prime * result + ((adresse == null) ? 0 : adresse.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((contact == null) ? 0 : contact.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((tel == null) ? 0 : tel.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -82,25 +129,39 @@ public class Hopitale {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Hopitale other = (Hopitale) obj;
-		if (code_hopitale == null) {
-			if (other.code_hopitale != null)
+		Hopital other = (Hopital) obj;
+		if (adresse == null) {
+			if (other.adresse != null)
 				return false;
-		} else if (!code_hopitale.equals(other.code_hopitale))
+		} else if (!adresse.equals(other.adresse))
 			return false;
-		if (nom_Hopitale == null) {
-			if (other.nom_Hopitale != null)
+		if (code == null) {
+			if (other.code != null)
 				return false;
-		} else if (!nom_Hopitale.equals(other.nom_Hopitale))
+		} else if (!code.equals(other.code))
+			return false;
+		if (contact == null) {
+			if (other.contact != null)
+				return false;
+		} else if (!contact.equals(other.contact))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (tel == null) {
+			if (other.tel != null)
+				return false;
+		} else if (!tel.equals(other.tel))
 			return false;
 		return true;
 	}
-
-
-
-	
-
-	
 	
 	
 

@@ -41,9 +41,9 @@ public class ServiceController {
 		return serviceConverter.entityToDto(findAll);
 	}
 
-	// get serviceDto by Code_Service
-	@GetMapping("/find/{Code_Service}")
-	public ServiceDto getServiceDtoById(@PathVariable(value = "Code_Service") long id) {
+	// get serviceDto by code
+	@GetMapping("/find/{code}")
+	public ServiceDto getServiceDtoById(@PathVariable(value = "code") long id) {
 		Service1 service = serviceService.get(id);
 		return serviceConverter.entityToDto(service);
 	}
@@ -55,45 +55,22 @@ public class ServiceController {
 		service = serviceService.save(service);
 		return serviceConverter.entityToDto(service);
 	}
-
-	/*
-	// update service
-	@PutMapping("/save/{Code_Service}")
-	public ServiceDto updateService(@RequestBody ServiceDto serviceDto, @PathVariable("Code_Service") long id) {
-		Service1 service = serviceConverter.dtoToEntity(serviceDto);
-		Service1 existingservice = serviceService.get(id);
-		existingservice.setNom_Service(service.getNom_Service());
-		existingservice = serviceService.save(existingservice);
-		return serviceConverter.entityToDto(existingservice);
-	}
-	*/
 	
 
 	
 	// update service
-	@PutMapping("/save/{Code_Service}")
-	public ServiceDto updateService(@RequestBody ServiceDto serviceDto, @PathVariable("Code_Service") long id) {
+	@PutMapping("/save/{code}")
+	public ServiceDto updateService(@RequestBody ServiceDto serviceDto, @PathVariable("code") long id) {
 		Service1 existingservice = serviceService.get(id);
-		existingservice.setNom_service(serviceDto.getNom_service());
+		existingservice.setNom(serviceDto.getNom());
 		existingservice = serviceService.save(existingservice);
 		return serviceConverter.entityToDto(existingservice);
 	}
 	
-
-	/*
-	// delete service by Code_Service
-	@DeleteMapping("delete/{Code_Service}")
-	public String deleteService(@PathVariable("Code_Service") long id) {
-		Service1 existingservice = serviceService.get(id);
-		ServiceDto serviceDto = serviceConverter.entityToDto(existingservice);
-		serviceService.delete(id);
-		return serviceDto.toString() + " " + "is deleted";
-	}
-	*/
 	
-	// delete service by Code_Service
-		@DeleteMapping("delete/{Code_Service}")
-		public String deleteService(@PathVariable("Code_Service") long id) {
+	// delete service by code
+		@DeleteMapping("delete/{code}")
+		public String deleteService(@PathVariable("code") long id) {
 			Service1 existingservice = serviceService.get(id);
 			serviceService.delete(id);
 			return existingservice.toString() + " " + "is deleted";

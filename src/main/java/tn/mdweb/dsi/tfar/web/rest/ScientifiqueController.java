@@ -8,17 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import tn.mdweb.dsi.tfar.converter.PatientConverter;
+
 import tn.mdweb.dsi.tfar.converter.ScientifiqueConverter;
-import tn.mdweb.dsi.tfar.domain.dto.PatientDto;
 import tn.mdweb.dsi.tfar.domain.dto.ScientifiqueDto;
-import tn.mdweb.dsi.tfar.domain.entity.Patient;
 import tn.mdweb.dsi.tfar.domain.entity.Scientifique;
-import tn.mdweb.dsi.tfar.service.PatientService;
+
 import tn.mdweb.dsi.tfar.service.ScientifiqueService;
 
 @RestController
@@ -40,8 +38,8 @@ public class ScientifiqueController {
 	}
 
 	// get scientifiqueDto by code_sc
-	@GetMapping("/find/{code_sc}")
-	public ScientifiqueDto getScientifiqueDtoById(@PathVariable(value = "code_sc") Long id) {
+	@GetMapping("/find/{code}")
+	public ScientifiqueDto getScientifiqueDtoById(@PathVariable(value = "code") Long id) {
 		Scientifique patient = scientifiqueService.get(id);
 		return scientifiqueConverter.entityToDto(patient);
 	}
@@ -55,30 +53,30 @@ public class ScientifiqueController {
 	}
 
 	// update patient
-	@PutMapping("/save/{code_sc}")
+	@PutMapping("/save/{code}")
 	public ScientifiqueDto updateScientifique(@RequestBody ScientifiqueDto scientifiqueDto,
-			@PathVariable("code_sc") Long id) throws Exception {
+			@PathVariable("code") Long id) throws Exception {
 		Scientifique existingscientifique = scientifiqueService.get(id);
-		existingscientifique.setNom_sc(scientifiqueDto.getNom_sc());
-		existingscientifique.setPrenom_sc(scientifiqueDto.getPrenom_sc());
-		existingscientifique.setService_sc(scientifiqueDto.getService_sc());
-		existingscientifique.setCentre_sc(scientifiqueDto.getCentre_sc());
-		existingscientifique.setAdresse_sc(scientifiqueDto.getAdresse_sc());
-		existingscientifique.setTel_sc(scientifiqueDto.getTel_sc());
-		existingscientifique.setEmail_sc(scientifiqueDto.getEmail_sc());
-		existingscientifique.setPhoto_sc(scientifiqueDto.getPhoto_sc());
-		existingscientifique.setType_sc(scientifiqueDto.getType_sc());
-		existingscientifique.setLogin_sc(scientifiqueDto.getLogin_sc());
-		existingscientifique.setPasswd_sc(scientifiqueDto.getPasswd_sc());
+		existingscientifique.setNom(scientifiqueDto.getNom());
+		existingscientifique.setPrenom(scientifiqueDto.getPrenom());
+		existingscientifique.setService(scientifiqueDto.getService());
+		existingscientifique.setCentre(scientifiqueDto.getCentre());
+		existingscientifique.setAdresse(scientifiqueDto.getAdresse());
+		existingscientifique.setTel(scientifiqueDto.getTel());
+		existingscientifique.setEmail(scientifiqueDto.getEmail());
+		existingscientifique.setPhoto(scientifiqueDto.getPhoto());
+		existingscientifique.setType(scientifiqueDto.getType());
+		existingscientifique.setLogin(scientifiqueDto.getLogin());
+		existingscientifique.setPassword(scientifiqueDto.getPassword());
 		existingscientifique.setUrl(scientifiqueDto.getUrl());
 
 		existingscientifique = scientifiqueService.save(existingscientifique);
 		return scientifiqueConverter.entityToDto(existingscientifique);
 	}
 
-	// delete scientifique by code_sc
-	@DeleteMapping("delete/{code_sc}")
-	public String deleteScientifique(@PathVariable("code_sc") Long id) {
+	// delete scientifique by code
+	@DeleteMapping("delete/{code}")
+	public String deleteScientifique(@PathVariable("code") Long id) {
 		Scientifique existingscientifique = scientifiqueService.get(id);
 		scientifiqueService.delete(id);
 		return existingscientifique.toString() + " " + "is deleted";

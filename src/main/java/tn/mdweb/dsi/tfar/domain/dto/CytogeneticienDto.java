@@ -1,74 +1,63 @@
-package tn.mdweb.dsi.tfar.domain.entity;
+package tn.mdweb.dsi.tfar.domain.dto;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "scientifique")
-public class Scientifique {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "code")
-	private Long code;
-
-	@Column(name = "nom")
+public class CytogeneticienDto {
+	
 	private String nom;
 
-	@Column(name = "prenom")
 	private String prenom;
 
-	@Column(name = "service")
 	private String service;
 
-	@Column(name = "centre")
-	private String centre;
+	private String etab;
 
-	@Column(name = "adresse")
 	private String adresse;
 
-	@Column(name = "tel")
 	private String tel;
-
-	@Column(name = "email")
+	
+	private String poste;
+	
+	private String fax;
+	
 	private String email;
 
-	@Column(name = "photo")
 	private String photo;
 
-	@Column(name = "type")
 	private String type;
 
-	@Column(name = "login")
 	private String login;
 
-	@Column(name = "password")
 	private String password;
 
-	@Column(name = "url")
 	private String url;
 
-	@ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
-	@JoinColumn(name = "code_universite", referencedColumnName = "code_universite",nullable = false)
-	private Universite universite;
+	private Long codeHopital;
+	
+	private Long codeService1;
 
-	public Scientifique() {
+	public CytogeneticienDto() {
 	}
 
-	public Long getCode() {
-		return code;
-	}
-
-	public void setCode(Long code) {
-		this.code = code;
+	public CytogeneticienDto(String nom, String prenom, String service, String etab, String adresse, String tel,
+			String poste, String fax, String email, String photo, String type, String login, String password,
+			String url, Long codeHopital, Long codeService1) {
+		
+		this.nom = nom;
+		this.prenom = prenom;
+		this.service = service;
+		this.etab = etab;
+		this.adresse = adresse;
+		this.tel = tel;
+		this.poste = poste;
+		this.fax = fax;
+		this.email = email;
+		this.photo = photo;
+		this.type = type;
+		this.login = login;
+		this.password = password;
+		this.url = url;
+		this.codeHopital = codeHopital;
+		this.codeService1 = codeService1;
 	}
 
 	public String getNom() {
@@ -95,12 +84,12 @@ public class Scientifique {
 		this.service = service;
 	}
 
-	public String getCentre() {
-		return centre;
+	public String getEtab() {
+		return etab;
 	}
 
-	public void setCentre(String centre) {
-		this.centre = centre;
+	public void setEtab(String etab) {
+		this.etab = etab;
 	}
 
 	public String getAdresse() {
@@ -117,6 +106,22 @@ public class Scientifique {
 
 	public void setTel(String tel) {
 		this.tel = tel;
+	}
+
+	public String getPoste() {
+		return poste;
+	}
+
+	public void setPoste(String poste) {
+		this.poste = poste;
+	}
+
+	public String getFax() {
+		return fax;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
 	}
 
 	public String getEmail() {
@@ -167,20 +172,28 @@ public class Scientifique {
 		this.url = url;
 	}
 
-	public Universite getUniversite() {
-		return universite;
+	public Long getCodeHopital() {
+		return codeHopital;
 	}
 
-	public void setUniversite(Universite universite) {
-		this.universite = universite;
+	public void setCodeHopital(Long codeHopital) {
+		this.codeHopital = codeHopital;
+	}
+
+	public Long getCodeService1() {
+		return codeService1;
+	}
+
+	public void setCodeService1(Long codeService1) {
+		this.codeService1 = codeService1;
 	}
 
 	@Override
 	public String toString() {
-		return "Scientifique [code=" + code + ", nom=" + nom + ", prenom=" + prenom + ", service=" + service
-				+ ", centre=" + centre + ", adresse=" + adresse + ", tel=" + tel + ", email=" + email + ", photo="
-				+ photo + ", type=" + type + ", login=" + login + ", password=" + password + ", url=" + url
-				+ ", universite=" + universite + "]";
+		return "CytogeneticienDto [nom=" + nom + ", prenom=" + prenom + ", service=" + service + ", etab=" + etab
+				+ ", adresse=" + adresse + ", tel=" + tel + ", poste=" + poste + ", fax=" + fax + ", email=" + email
+				+ ", photo=" + photo + ", type=" + type + ", login=" + login + ", password=" + password + ", url=" + url
+				+ ", codeHopital=" + codeHopital + ", codeService1=" + codeService1 + "]";
 	}
 
 	@Override
@@ -188,18 +201,20 @@ public class Scientifique {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((adresse == null) ? 0 : adresse.hashCode());
-		result = prime * result + ((centre == null) ? 0 : centre.hashCode());
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((codeHopital == null) ? 0 : codeHopital.hashCode());
+		result = prime * result + ((codeService1 == null) ? 0 : codeService1.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((etab == null) ? 0 : etab.hashCode());
+		result = prime * result + ((fax == null) ? 0 : fax.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((photo == null) ? 0 : photo.hashCode());
+		result = prime * result + ((poste == null) ? 0 : poste.hashCode());
 		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
 		result = prime * result + ((service == null) ? 0 : service.hashCode());
 		result = prime * result + ((tel == null) ? 0 : tel.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + ((universite == null) ? 0 : universite.hashCode());
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
 		return result;
 	}
@@ -212,26 +227,36 @@ public class Scientifique {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Scientifique other = (Scientifique) obj;
+		CytogeneticienDto other = (CytogeneticienDto) obj;
 		if (adresse == null) {
 			if (other.adresse != null)
 				return false;
 		} else if (!adresse.equals(other.adresse))
 			return false;
-		if (centre == null) {
-			if (other.centre != null)
+		if (codeHopital == null) {
+			if (other.codeHopital != null)
 				return false;
-		} else if (!centre.equals(other.centre))
+		} else if (!codeHopital.equals(other.codeHopital))
 			return false;
-		if (code == null) {
-			if (other.code != null)
+		if (codeService1 == null) {
+			if (other.codeService1 != null)
 				return false;
-		} else if (!code.equals(other.code))
+		} else if (!codeService1.equals(other.codeService1))
 			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
+			return false;
+		if (etab == null) {
+			if (other.etab != null)
+				return false;
+		} else if (!etab.equals(other.etab))
+			return false;
+		if (fax == null) {
+			if (other.fax != null)
+				return false;
+		} else if (!fax.equals(other.fax))
 			return false;
 		if (login == null) {
 			if (other.login != null)
@@ -253,6 +278,11 @@ public class Scientifique {
 				return false;
 		} else if (!photo.equals(other.photo))
 			return false;
+		if (poste == null) {
+			if (other.poste != null)
+				return false;
+		} else if (!poste.equals(other.poste))
+			return false;
 		if (prenom == null) {
 			if (other.prenom != null)
 				return false;
@@ -273,11 +303,6 @@ public class Scientifique {
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
-		if (universite == null) {
-			if (other.universite != null)
-				return false;
-		} else if (!universite.equals(other.universite))
-			return false;
 		if (url == null) {
 			if (other.url != null)
 				return false;
@@ -285,6 +310,10 @@ public class Scientifique {
 			return false;
 		return true;
 	}
+	
+	
+
+	
 	
 	
 

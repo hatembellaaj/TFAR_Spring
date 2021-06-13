@@ -3,38 +3,38 @@ package tn.mdweb.dsi.tfar.converter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-import tn.mdweb.dsi.tfar.domain.dto.HopitaleDto;
-import tn.mdweb.dsi.tfar.domain.entity.Hopitale;
+import tn.mdweb.dsi.tfar.domain.dto.HopitalDto;
+import tn.mdweb.dsi.tfar.domain.entity.Hopital;
 
 @Component
-public class HopitaleConverter {
+public class HopitalConverter {
 
-	public HopitaleDto entityToDto(Hopitale hopitale) {
-		HopitaleDto hopitaleDto = new HopitaleDto();
-		hopitaleDto.setCode_hopitale(hopitale.getCode_hopitale());
-		hopitaleDto.setNom_Hopitale(hopitale.getNom_Hopitale());
-		return hopitaleDto;
+	public HopitalDto entityToDto(Hopital hopital) {
+
+		ModelMapper mapper = new ModelMapper();
+		HopitalDto map = mapper.map(hopital, HopitalDto.class);
+		return map;
 	}
 
-	public List<HopitaleDto> entityToDto(List<Hopitale> hopitales) {
+	public List<HopitalDto> entityToDto(List<Hopital> hopital) {
 
-		return hopitales.stream().map(x -> entityToDto(x)).collect(Collectors.toList());
-
-	}
-
-	public Hopitale dtoToEntity(HopitaleDto hopitaleDto) {
-		Hopitale hopitale = new Hopitale();
-		hopitale.setCode_hopitale(hopitaleDto.getCode_hopitale());
-		hopitale.setNom_Hopitale(hopitaleDto.getNom_Hopitale());
-		return hopitale;
+		return hopital.stream().map(x -> entityToDto(x)).collect(Collectors.toList());
 
 	}
 
-	public List<Hopitale> dtoToEntity(List<HopitaleDto> hopitaleDtos) {
-		
-		return hopitaleDtos.stream().map(x -> dtoToEntity(x)).collect(Collectors.toList());
+	public Hopital dtoToEntity(HopitalDto hopitaldto) {
+
+		ModelMapper mapper = new ModelMapper();
+		Hopital map = mapper.map(hopitaldto, Hopital.class);
+		return map;
+	}
+
+	public List<Hopital> dtoToEntity(List<HopitalDto> hopitaldto) {
+
+		return hopitaldto.stream().map(x -> dtoToEntity(x)).collect(Collectors.toList());
 	}
 
 }

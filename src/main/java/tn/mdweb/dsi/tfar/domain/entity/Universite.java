@@ -1,25 +1,42 @@
-package tn.mdweb.dsi.tfar.domain.dto;
+package tn.mdweb.dsi.tfar.domain.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class HopitalDto {
+@Entity
+@Table(name = "universite")
+public class Universite {
 	
-	private Long code;
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "code_universite")
+	private Long code_universite;
+	
+	@Column(name = "nom")
 	private String nom;
-
+	
+	@Column(name = "adresse")
 	private String adresse;
-
+	
+	@Column(name = "tel")
 	private String tel;
-
+	
+	@Column(name = "contact")
 	private String contact;
-
+	
+	@Column(name = "email")
 	private String email;
 
-	public HopitalDto() {
+	public Universite() {
 	}
 
-	public HopitalDto(Long code, String nom, String adresse, String tel, String contact, String email) {
-		this.code = code;
+	public Universite(Long code_universite, String nom, String adresse, String tel, String contact, String email) {
+		this.code_universite = code_universite;
 		this.nom = nom;
 		this.adresse = adresse;
 		this.tel = tel;
@@ -27,12 +44,12 @@ public class HopitalDto {
 		this.email = email;
 	}
 
-	public Long getCode() {
-		return code;
+	public Long getCode_universite() {
+		return code_universite;
 	}
 
-	public void setCode(Long code) {
-		this.code = code;
+	public void setCode_universite(Long code_universite) {
+		this.code_universite = code_universite;
 	}
 
 	public String getNom() {
@@ -77,8 +94,8 @@ public class HopitalDto {
 
 	@Override
 	public String toString() {
-		return "HopitalDto [code=" + code + ", nom=" + nom + ", adresse=" + adresse + ", tel=" + tel + ", contact="
-				+ contact + ", email=" + email + "]";
+		return "Universite [code_universite=" + code_universite + ", nom=" + nom + ", adresse=" + adresse + ", tel="
+				+ tel + ", contact=" + contact + ", email=" + email + "]";
 	}
 
 	@Override
@@ -86,7 +103,7 @@ public class HopitalDto {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((adresse == null) ? 0 : adresse.hashCode());
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((code_universite == null) ? 0 : code_universite.hashCode());
 		result = prime * result + ((contact == null) ? 0 : contact.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
@@ -102,16 +119,16 @@ public class HopitalDto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		HopitalDto other = (HopitalDto) obj;
+		Universite other = (Universite) obj;
 		if (adresse == null) {
 			if (other.adresse != null)
 				return false;
 		} else if (!adresse.equals(other.adresse))
 			return false;
-		if (code == null) {
-			if (other.code != null)
+		if (code_universite == null) {
+			if (other.code_universite != null)
 				return false;
-		} else if (!code.equals(other.code))
+		} else if (!code_universite.equals(other.code_universite))
 			return false;
 		if (contact == null) {
 			if (other.contact != null)
@@ -137,12 +154,7 @@ public class HopitalDto {
 	}
 	
 	
-	
-	
 
-	
-
-	
 	
 	
 
