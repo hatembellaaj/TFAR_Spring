@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -63,11 +64,11 @@ public class Cytogeneticien {
 	private String url;
 
 	@ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.MERGE)
-	@JoinColumn(name = "code_hopital", referencedColumnName = "code")
+	@JoinColumn(foreignKey = @ForeignKey(name = "code"))
 	private Hopital hopital;
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.MERGE)
-	@JoinColumn(name = "code_service", referencedColumnName = "code")
+	@JoinColumn(foreignKey = @ForeignKey(name = "code"))
 	private Service1 service1;
 
 	public Cytogeneticien() {
