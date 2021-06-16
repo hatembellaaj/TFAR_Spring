@@ -80,70 +80,22 @@ UNLOCK TABLES;
 -- Table structure for table `cytogeneticien`
 --
 
-DROP TABLE IF EXISTS `cytogeneticien`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cytogeneticien` (
-  `code` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(30) NOT NULL,
-  `prenom` varchar(30) DEFAULT NULL,
-  `service` varchar(200) DEFAULT NULL,
-  `etab` varchar(200) DEFAULT NULL,
-  `adresse` varchar(200) DEFAULT NULL,
-  `tel` varchar(20) DEFAULT NULL,
-  `poste` varchar(20) DEFAULT NULL,
-  `fax` varchar(20) DEFAULT NULL,
-  `email` varchar(200) DEFAULT NULL,
-  `photo` varchar(200) DEFAULT NULL,
-  `type` varchar(20) DEFAULT NULL,
-  `login` varchar(20) DEFAULT NULL,
-  `password` varchar(20) DEFAULT NULL,
-  `url` varchar(500) DEFAULT NULL,
-  `code_hopital` int NOT NULL,
-  `code_service` int NOT NULL,
-  PRIMARY KEY (`code`),
-  KEY `code_hopital` (`code_hopital`),
-  KEY `code_service` (`code_service`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `cytogeneticien`
 --
 
-LOCK TABLES `cytogeneticien` WRITE;
-/*!40000 ALTER TABLE `cytogeneticien` DISABLE KEYS */;
-INSERT INTO `cytogeneticien` VALUES (4,'string','string','string','string','string','string','string','string','string','string','string','string','string','string',1,1),(3,'string','string','string','string','string','string','string','string','string','string','string','string','string','string',1,1),(5,'string','string','string','string','string','string','string','string','string@gmail.com','string','string','string','string','string',1,1),(6,'string','string','string','string','string','string','string','string','string','string','string','string','string','string',1,2),(7,'string','string','string','string','string','string','string','string','string@gmail.com','string','string','string','string','string',5,1);
-/*!40000 ALTER TABLE `cytogeneticien` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Table structure for table `hopital`
 --
 
-DROP TABLE IF EXISTS `hopital`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `hopital` (
-  `code` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(50) NOT NULL,
-  `adresse` varchar(50) NOT NULL,
-  `tel` varchar(50) NOT NULL,
-  `contact` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  PRIMARY KEY (`code`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `hopital`
 --
 
-LOCK TABLES `hopital` WRITE;
-/*!40000 ALTER TABLE `hopital` DISABLE KEYS */;
-INSERT INTO `hopital` VALUES (1,'string','string','string','string','string'),(2,'string','string','string','string','string'),(5,'hopital militaire','route mazel chaker','55555555','gggggg','hm@gmail.com');
-/*!40000 ALTER TABLE `hopital` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `laboratoire`
@@ -173,128 +125,35 @@ UNLOCK TABLES;
 -- Table structure for table `medecin`
 --
 
-DROP TABLE IF EXISTS `medecin`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `medecin` (
-  `cin` int NOT NULL,
-  `nom` varchar(30) DEFAULT NULL,
-  `prenom` varchar(30) DEFAULT NULL,
-  `grade` varchar(30) DEFAULT NULL,
-  `type` varchar(30) DEFAULT 'Part',
-  `gouvernorat` enum('Ariana','Beja','BenArous','Bizerte','Gabes','Gafsa','Jendouba','Kairouan','Kasserine','Kebili','LeKef','Mahdia','LaManouba','Medenine','Monastir','Nabeul','Sfax','SidiBouzid','Siliana','Sousse','Tataouine','Tozeur','Tunis','Zaghouan','NP') DEFAULT 'NP',
-  `adresse` varchar(100) DEFAULT NULL,
-  `tel` varchar(15) DEFAULT NULL,
-  `poste` varchar(8) DEFAULT NULL,
-  `fax` varchar(15) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `image` varchar(100) DEFAULT NULL,
-  `login` varchar(10) DEFAULT NULL,
-  `password` varchar(10) DEFAULT NULL,
-  `url` varchar(500) DEFAULT NULL,
-  `code_hopital` int NOT NULL,
-  `code_service` int NOT NULL,
-  KEY `code_hopital` (`code_hopital`),
-  KEY `code_service` (`code_service`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 --
 -- Dumping data for table `medecin`
 --
 
-LOCK TABLES `medecin` WRITE;
-/*!40000 ALTER TABLE `medecin` DISABLE KEYS */;
-INSERT INTO `medecin` VALUES (0,'string','string','string','string','Ariana','string','string','string','string','string','string','string','string','string',1,1),(1,'string','string','string','string','Ariana','string','string','string','string','string','string','string','string','string',1,2);
-/*!40000 ALTER TABLE `medecin` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `scientifique`
 --
 
-DROP TABLE IF EXISTS `scientifique`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `scientifique` (
-  `code` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(20) DEFAULT NULL,
-  `prenom` varchar(20) DEFAULT NULL,
-  `service` varchar(100) DEFAULT NULL,
-  `centre` varchar(100) DEFAULT NULL,
-  `adresse` varchar(100) DEFAULT NULL,
-  `tel` varchar(30) DEFAULT NULL,
-  `email` varchar(30) DEFAULT NULL,
-  `photo` varchar(100) DEFAULT NULL,
-  `type` varchar(10) DEFAULT NULL,
-  `login` varchar(10) DEFAULT NULL,
-  `password` varchar(10) DEFAULT NULL,
-  `url` varchar(500) DEFAULT NULL,
-  `code_universite` int NOT NULL,
-  PRIMARY KEY (`code`),
-  KEY `code_universite` (`code_universite`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `scientifique`
 --
 
-LOCK TABLES `scientifique` WRITE;
-/*!40000 ALTER TABLE `scientifique` DISABLE KEYS */;
-INSERT INTO `scientifique` VALUES (9,'string','string','string','string','string','string','string','string','string','string','string','string',8),(8,'string','string','string','string','string','string','string','string','string','string','string','string',7);
-/*!40000 ALTER TABLE `scientifique` ENABLE KEYS */;
-UNLOCK TABLES;
-
 --
 -- Table structure for table `service`
 --
-
-DROP TABLE IF EXISTS `service`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `service` (
-  `code` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(20) NOT NULL,
-  PRIMARY KEY (`code`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `service`
 --
 
-LOCK TABLES `service` WRITE;
-/*!40000 ALTER TABLE `service` DISABLE KEYS */;
-INSERT INTO `service` VALUES (1,'string'),(2,'string'),(4,'service_m1');
-/*!40000 ALTER TABLE `service` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `universite`
 --
 
-DROP TABLE IF EXISTS `universite`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `universite` (
-  `code_universite` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(20) DEFAULT NULL,
-  `adresse` varchar(100) DEFAULT NULL,
-  `tel` varchar(30) DEFAULT NULL,
-  `contact` varchar(100) DEFAULT NULL,
-  `email` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`code_universite`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `universite`
---
-
-LOCK TABLES `universite` WRITE;
-/*!40000 ALTER TABLE `universite` DISABLE KEYS */;
-INSERT INTO `universite` VALUES (1,'universite de sfax','sfax','24242424','contact1','s@gmail.com'),(2,'universite de sousse','sousse','24142414','contact2','s2@gmail.com'),(3,'universite de mahdia','mahdia','11441144','contact3','s3@gmail.com'),(5,'universite 1','adresse 1','22115588','string','st@gmail.com'),(6,'universite 2','adresse 2','22115588','string','st2@gmail.com'),(7,'string','string','string','string','string'),(8,'string','string','string','string12','string');
 /*!40000 ALTER TABLE `universite` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

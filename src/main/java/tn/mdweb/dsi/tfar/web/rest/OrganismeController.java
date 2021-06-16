@@ -11,65 +11,57 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 //import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import tn.mdweb.dsi.tfar.converter.HopitalConverter;
-import tn.mdweb.dsi.tfar.domain.dto.HopitalDto;
-import tn.mdweb.dsi.tfar.domain.entity.Hopital;
-import tn.mdweb.dsi.tfar.service.HopitalService;
+import tn.mdweb.dsi.tfar.domain.entity.Organisme;
+import tn.mdweb.dsi.tfar.service.OrganismeService;
 
 @RestController
-@RequestMapping("/api/hopitalDtos")
-public class HopitalController {
+@RequestMapping("/api/organismes")
+public class OrganismeController {
 
 	@Autowired
-	private HopitalService hopitalService;
+	private OrganismeService organismeService;
 
-	@Autowired
-	private HopitalConverter hopitalConverter;
-
-	// get all hopitalDtos
+	// get all organismes
 	@GetMapping("/findAll")
-	public List<HopitalDto> getAllHopitalDtos() {
-		List<Hopital> findAll = hopitalService.listAll();
-		return hopitalConverter.entityToDto(findAll);
+	public List<Organisme> getAllOrganismes() {
+		List<Organisme> findAll = organismeService.listAll();
+		return findAll;
 	}
 
-	// get hopitalDto by code
+	// get organisme by code
 	@GetMapping("/find/{code}")
-	public HopitalDto getHopitaleDtoById(@PathVariable(value = "code") long id) {
-		Hopital hopitale = hopitalService.get(id);
-		return hopitalConverter.entityToDto(hopitale);
+	public Organisme getOrganismeById(@PathVariable(value = "code") long id) {
+		Organisme organisme = organismeService.get(id);
+		return organisme;
 	}
 
-	// create hopital
+	// create organisme
 	@PostMapping("/save")
-	public HopitalDto save(@RequestBody HopitalDto hopitaleDto) {
-		Hopital hopitale = hopitalConverter.dtoToEntity(hopitaleDto);
-		hopitale = hopitalService.save(hopitale);
-		return hopitalConverter.entityToDto(hopitale);
+	public Organisme save(@RequestBody Organisme organisme) {
+		return organismeService.save(organisme);
 	}
 
-	// update hopital
+	// update organisme
 	@PutMapping("/save/{code}")
-	public HopitalDto updateHopitale(@RequestBody HopitalDto hopitalDto, @PathVariable("code") long id) {
-		Hopital existinghopital = hopitalService.get(id);
-		existinghopital.setNom(hopitalDto.getNom());
-		existinghopital.setAdresse(hopitalDto.getAdresse());
-		existinghopital.setTel(hopitalDto.getTel());
-		existinghopital.setContact(hopitalDto.getContact());
-		existinghopital.setEmail(hopitalDto.getEmail());
-		existinghopital = hopitalService.save(existinghopital);
-		return hopitalConverter.entityToDto(existinghopital);
+	public Organisme updateOrganisme(@RequestBody Organisme organisme, @PathVariable("code") long id) {
+		Organisme existingorganisme = organismeService.get(id);
+		existingorganisme.setNom(organisme.getNom());
+		existingorganisme.setAdresse(organisme.getAdresse());
+		existingorganisme.setTel(organisme.getTel());
+		existingorganisme.setContact(organisme.getContact());
+		existingorganisme.setEmail(organisme.getEmail());
+		existingorganisme.setType(organisme.getType());
+		return organismeService.save(existingorganisme);
 	}
 
 
-	// delete hopital by code
+	// delete organisme by code
 	@DeleteMapping("delete/{code}")
-	public String deleteHopital(@PathVariable("code") long id) {
-		Hopital existinghopital = hopitalService.get(id);
-		hopitalService.delete(id);
-		return existinghopital.toString() + " " + "is deleted";
+	public String deleteOrganisme(@PathVariable("code") long id) {
+		Organisme existingorganisme = organismeService.get(id);
+		organismeService.delete(id);
+		return existingorganisme.toString() + " is deleted";
 	}
 
 }

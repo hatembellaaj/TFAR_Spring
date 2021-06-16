@@ -9,8 +9,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "service")
-public class Service1 {
+@Table(name = "departement")
+public class Departement {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,16 +21,12 @@ public class Service1 {
 	@Column(name="nom")
 	private String nom;
 
-	public Service1() {
+	public Departement() {
 	}
 
-	public Service1(Long code, @NotNull String nom) {
+	public Departement(Long code, @NotNull String nom) {
 		this.code = code;
 		this.nom = nom;
-	}
-	
-	public Service1(Long code) {
-		this.code = code;
 	}
 
 	public Long getCode() {
@@ -51,7 +47,7 @@ public class Service1 {
 
 	@Override
 	public String toString() {
-		return "Service1 [code=" + code + ", nom=" + nom + "]";
+		return "Departement [code=" + code + ", nom=" + nom + "]";
 	}
 
 	@Override
@@ -71,7 +67,7 @@ public class Service1 {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Service1 other = (Service1) obj;
+		Departement other = (Departement) obj;
 		if (code == null) {
 			if (other.code != null)
 				return false;

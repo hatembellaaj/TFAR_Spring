@@ -2,15 +2,19 @@ package tn.mdweb.dsi.tfar.domain.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import tn.mdweb.dsi.tfar.enumeration.OrganismeType;
+
 @Entity
-@Table(name = "hopital")
-public class Hopital {
+@Table(name = "organisme")
+public class Organisme {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,22 +40,24 @@ public class Hopital {
 	@NotNull
 	@Column(name = "email")
 	private String email;
+	
+	@NotNull
+	@Column(name = "type")
+	@Enumerated(EnumType.STRING)
+	private OrganismeType type;
 
-	public Hopital() {
+	public Organisme() {
 	}
-	public Hopital(Long code) {
-		this.code = code;
-	}
 
-	public Hopital(Long code, @NotNull String nom, @NotNull String adresse, @NotNull String tel,
-			@NotNull String contact, @NotNull String email) {
-
+	public Organisme(Long code, @NotNull String nom, @NotNull String adresse, @NotNull String tel,
+			@NotNull String contact, @NotNull String email, @NotNull OrganismeType type) {
 		this.code = code;
 		this.nom = nom;
 		this.adresse = adresse;
 		this.tel = tel;
 		this.contact = contact;
 		this.email = email;
+		this.type = type;
 	}
 
 	public Long getCode() {
@@ -102,10 +108,18 @@ public class Hopital {
 		this.email = email;
 	}
 
+	public OrganismeType getType() {
+		return type;
+	}
+
+	public void setType(OrganismeType type) {
+		this.type = type;
+	}
+
 	@Override
 	public String toString() {
-		return "Hopital [code=" + code + ", nom=" + nom + ", adresse=" + adresse + ", tel=" + tel + ", contact="
-				+ contact + ", email=" + email + "]";
+		return "Organisme [code=" + code + ", nom=" + nom + ", adresse=" + adresse + ", tel=" + tel + ", contact="
+				+ contact + ", email=" + email + ", type=" + type + "]";
 	}
 
 	@Override
@@ -118,6 +132,7 @@ public class Hopital {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		result = prime * result + ((tel == null) ? 0 : tel.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -129,7 +144,7 @@ public class Hopital {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Hopital other = (Hopital) obj;
+		Organisme other = (Organisme) obj;
 		if (adresse == null) {
 			if (other.adresse != null)
 				return false;
@@ -160,8 +175,12 @@ public class Hopital {
 				return false;
 		} else if (!tel.equals(other.tel))
 			return false;
+		if (type != other.type)
+			return false;
 		return true;
 	}
+	
+	
 	
 	
 

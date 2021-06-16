@@ -5,32 +5,32 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.mdweb.dsi.tfar.domain.entity.Service1;
-import tn.mdweb.dsi.tfar.repository.ServiceRepository;
+import tn.mdweb.dsi.tfar.domain.entity.Departement;
+import tn.mdweb.dsi.tfar.repository.DepartementRepository;
 
 
 @Service
-public class ServiceService {
+public class DepartementService {
 	
 	@Autowired
-	private ServiceRepository serviceRepository;
+	private DepartementRepository departementRepository;
 	
 	
-	public List<Service1> listAll() {
-		return serviceRepository.findAll();	
+	public List<Departement> listAll() {
+		return departementRepository.findAll();	
 	}
 	
-	public Service1 save(Service1 service) {
-		serviceRepository.save(service);
-		return service;
+	public Departement save(Departement departement) {
+		departementRepository.save(departement);
+		return departement;
 	}
 	
-	public Service1 get(long id) {
-		return serviceRepository.findById(id).get();
+	public Departement get(long id) {
+		return departementRepository.findById(id).get();
 	}
 	
 	public void delete(long id) {
-		serviceRepository.deleteById(id);
+		departementRepository.deleteById(id);
 	}
 
 }

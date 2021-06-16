@@ -3,31 +3,31 @@ package tn.mdweb.dsi.tfar.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.mdweb.dsi.tfar.domain.entity.Medecin;
-import tn.mdweb.dsi.tfar.repository.MedecinRepository;
+import tn.mdweb.dsi.tfar.domain.entity.User;
+import tn.mdweb.dsi.tfar.repository.UserRepository;
 
 @Service
-public class MedecinService {
+public class UserService {
 	
 	@Autowired
-	private MedecinRepository medecinRepository;
+	private UserRepository userRepository;
 	
 	
-	public List<Medecin> listAll() {
-		return medecinRepository.findAll();	
+	public List<User> listAll() {
+		return userRepository.findAll();	
 	}
 	
-	public Medecin save(Medecin medecin) {
-		medecinRepository.save(medecin);
-		return medecin;
+	public User save(User user) {
+		userRepository.save(user);
+		return user;
 	}
 	
-	public Medecin get(long id) {
-		return medecinRepository.findById(id).get();
+	public User get(long id) {
+		return userRepository.findById(id).get();
 	}
 	
 	public void delete(long id) {
-		medecinRepository.deleteById(id);
+		userRepository.deleteById(id);
 	}
 	
 

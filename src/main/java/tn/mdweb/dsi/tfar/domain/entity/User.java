@@ -1,24 +1,35 @@
 package tn.mdweb.dsi.tfar.domain.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import tn.mdweb.dsi.tfar.enumeration.Gouvernorat;
+import tn.mdweb.dsi.tfar.enumeration.RoleType;
+import tn.mdweb.dsi.tfar.enumeration.TypeUser;
 
 @Entity
-@Table(name = "medecin")
-public class Medecin {
+@Table(name = "user")
+public class User {
 
 	@Id
-	@Column(name = "cin")
-	private Long cin;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "code")
+	private Long code;
+
+	@Column(name = "role")
+	@Enumerated(EnumType.STRING)
+	private RoleType role;
+
+	@Column(name = "type", length = 17)
+	@Enumerated(EnumType.STRING)
+	private TypeUser type;
 
 	@Column(name = "nom")
 	private String nom;
@@ -29,10 +40,7 @@ public class Medecin {
 	@Column(name = "grade")
 	private String grade;
 
-	@Column(name = "type")
-	private String type;
-
-	@Column(name = "gouvernorat")
+	@Column(name = "gouvernorat", length = 20)
 	@Enumerated(EnumType.STRING)
 	private Gouvernorat gouvernorat;
 
@@ -42,17 +50,17 @@ public class Medecin {
 	@Column(name = "tel")
 	private String tel;
 
+	@Column(name = "email")
+	private String email;
+
+	@Column(name = "photo")
+	private String photo;
+
 	@Column(name = "poste")
 	private String poste;
 
 	@Column(name = "fax")
 	private String fax;
-
-	@Column(name = "email")
-	private String email;
-
-	@Column(name = "image")
-	private String image;
 
 	@Column(name = "login")
 	private String login;
@@ -63,45 +71,62 @@ public class Medecin {
 	@Column(name = "url")
 	private String url;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "code_hopital", referencedColumnName = "code")
-	private Hopital hopital;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "code_organisme", referencedColumnName = "code")
+	private Organisme organisme;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "code_service", referencedColumnName = "code")
-	private Service1 service1;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "code_departement", referencedColumnName = "code")
+	private Departement departement;
 
-	public Medecin() {
+	public User() {
 	}
 
-	public Medecin(Long cin, String nom, String prenom, String grade, String type, Gouvernorat gouvernorat,
-			String adresse, String tel, String poste, String fax, String email, String image, String login,
-			String password, String url, Hopital hopital, Service1 service1) {
-		this.cin = cin;
+	public User(Long code, RoleType role, TypeUser type, String nom, String prenom, String grade,
+			Gouvernorat gouvernorat, String adresse, String tel, String email, String photo, String poste, String fax,
+			String login, String password, String url, Organisme organisme, Departement departement) {
+		this.code = code;
+		this.role = role;
+		this.type = type;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.grade = grade;
-		this.type = type;
 		this.gouvernorat = gouvernorat;
 		this.adresse = adresse;
 		this.tel = tel;
+		this.email = email;
+		this.photo = photo;
 		this.poste = poste;
 		this.fax = fax;
-		this.email = email;
-		this.image = image;
 		this.login = login;
 		this.password = password;
 		this.url = url;
-		this.hopital = hopital;
-		this.service1 = service1;
+		this.organisme = organisme;
+		this.departement = departement;
 	}
 
-	public Long getCin() {
-		return cin;
+	public Long getCode() {
+		return code;
 	}
 
-	public void setCin(Long cin) {
-		this.cin = cin;
+	public void setCode(Long code) {
+		this.code = code;
+	}
+
+	public RoleType getRole() {
+		return role;
+	}
+
+	public void setRole(RoleType role) {
+		this.role = role;
+	}
+
+	public TypeUser getType() {
+		return type;
+	}
+
+	public void setType(TypeUser type) {
+		this.type = type;
 	}
 
 	public String getNom() {
@@ -128,14 +153,6 @@ public class Medecin {
 		this.grade = grade;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public Gouvernorat getGouvernorat() {
 		return gouvernorat;
 	}
@@ -160,6 +177,22 @@ public class Medecin {
 		this.tel = tel;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
 	public String getPoste() {
 		return poste;
 	}
@@ -174,22 +207,6 @@ public class Medecin {
 
 	public void setFax(String fax) {
 		this.fax = fax;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
 	}
 
 	public String getLogin() {
@@ -216,28 +233,29 @@ public class Medecin {
 		this.url = url;
 	}
 
-	public Hopital getHopital() {
-		return hopital;
+	public Organisme getOrganisme() {
+		return organisme;
 	}
 
-	public void setHopital(Hopital hopital) {
-		this.hopital = hopital;
+	public void setOrganisme(Organisme organisme) {
+		this.organisme = organisme;
 	}
 
-	public Service1 getService1() {
-		return service1;
+	public Departement getDepartement() {
+		return departement;
 	}
 
-	public void setService1(Service1 service1) {
-		this.service1 = service1;
+	public void setDepartement(Departement departement) {
+		this.departement = departement;
 	}
 
 	@Override
 	public String toString() {
-		return "Medecin [cin=" + cin + ", nom=" + nom + ", prenom=" + prenom + ", grade=" + grade + ", type=" + type
-				+ ", gouvernorat=" + gouvernorat + ", adresse=" + adresse + ", tel=" + tel + ", poste=" + poste
-				+ ", fax=" + fax + ", email=" + email + ", image=" + image + ", login=" + login + ", password="
-				+ password + ", url=" + url + ", hopital=" + hopital + ", service1=" + service1 + "]";
+		return "User [code=" + code + ", role=" + role + ", type=" + type + ", nom=" + nom + ", prenom=" + prenom
+				+ ", grade=" + grade + ", gouvernorat=" + gouvernorat + ", adresse=" + adresse + ", tel=" + tel
+				+ ", email=" + email + ", photo=" + photo + ", poste=" + poste + ", fax=" + fax + ", login=" + login
+				+ ", password=" + password + ", url=" + url + ", organisme=" + organisme + ", departement="
+				+ departement + "]";
 	}
 
 	@Override
@@ -245,19 +263,20 @@ public class Medecin {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((adresse == null) ? 0 : adresse.hashCode());
-		result = prime * result + ((cin == null) ? 0 : cin.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((departement == null) ? 0 : departement.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((fax == null) ? 0 : fax.hashCode());
 		result = prime * result + ((gouvernorat == null) ? 0 : gouvernorat.hashCode());
 		result = prime * result + ((grade == null) ? 0 : grade.hashCode());
-		result = prime * result + ((hopital == null) ? 0 : hopital.hashCode());
-		result = prime * result + ((image == null) ? 0 : image.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((organisme == null) ? 0 : organisme.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((photo == null) ? 0 : photo.hashCode());
 		result = prime * result + ((poste == null) ? 0 : poste.hashCode());
 		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
-		result = prime * result + ((service1 == null) ? 0 : service1.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((tel == null) ? 0 : tel.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
@@ -272,16 +291,21 @@ public class Medecin {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Medecin other = (Medecin) obj;
+		User other = (User) obj;
 		if (adresse == null) {
 			if (other.adresse != null)
 				return false;
 		} else if (!adresse.equals(other.adresse))
 			return false;
-		if (cin == null) {
-			if (other.cin != null)
+		if (code == null) {
+			if (other.code != null)
 				return false;
-		} else if (!cin.equals(other.cin))
+		} else if (!code.equals(other.code))
+			return false;
+		if (departement == null) {
+			if (other.departement != null)
+				return false;
+		} else if (!departement.equals(other.departement))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -300,16 +324,6 @@ public class Medecin {
 				return false;
 		} else if (!grade.equals(other.grade))
 			return false;
-		if (hopital == null) {
-			if (other.hopital != null)
-				return false;
-		} else if (!hopital.equals(other.hopital))
-			return false;
-		if (image == null) {
-			if (other.image != null)
-				return false;
-		} else if (!image.equals(other.image))
-			return false;
 		if (login == null) {
 			if (other.login != null)
 				return false;
@@ -320,10 +334,20 @@ public class Medecin {
 				return false;
 		} else if (!nom.equals(other.nom))
 			return false;
+		if (organisme == null) {
+			if (other.organisme != null)
+				return false;
+		} else if (!organisme.equals(other.organisme))
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
+			return false;
+		if (photo == null) {
+			if (other.photo != null)
+				return false;
+		} else if (!photo.equals(other.photo))
 			return false;
 		if (poste == null) {
 			if (other.poste != null)
@@ -335,20 +359,14 @@ public class Medecin {
 				return false;
 		} else if (!prenom.equals(other.prenom))
 			return false;
-		if (service1 == null) {
-			if (other.service1 != null)
-				return false;
-		} else if (!service1.equals(other.service1))
+		if (role != other.role)
 			return false;
 		if (tel == null) {
 			if (other.tel != null)
 				return false;
 		} else if (!tel.equals(other.tel))
 			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
+		if (type != other.type)
 			return false;
 		if (url == null) {
 			if (other.url != null)
@@ -357,7 +375,5 @@ public class Medecin {
 			return false;
 		return true;
 	}
-	
-	
 
 }

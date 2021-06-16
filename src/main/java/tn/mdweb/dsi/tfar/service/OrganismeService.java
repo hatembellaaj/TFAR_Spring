@@ -5,31 +5,31 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tn.mdweb.dsi.tfar.domain.entity.Hopital;
-import tn.mdweb.dsi.tfar.repository.HopitalRepository;
+import tn.mdweb.dsi.tfar.domain.entity.Organisme;
+import tn.mdweb.dsi.tfar.repository.OrganismeRepository;
 
 @Service
-public class HopitalService {
+public class OrganismeService {
 	
 	@Autowired
-	private HopitalRepository hopitaleRepository;
+	private OrganismeRepository organismeRepository;
 	
 	
-	public List<Hopital> listAll() {
-		return hopitaleRepository.findAll();	
+	public List<Organisme> listAll() {
+		return organismeRepository.findAll();	
 	}
 	
-	public Hopital save(Hopital hopitale) {
-		hopitaleRepository.save(hopitale);
-		return hopitale;
+	public Organisme save(Organisme organisme) {
+		organismeRepository.save(organisme);
+		return organisme;
 	}
 	
-	public Hopital get(long id) {
-		return hopitaleRepository.findById(id).get();
+	public Organisme get(long id) {
+		return organismeRepository.findById(id).get();
 	}
 	
 	public void delete(long id) {
-		hopitaleRepository.deleteById(id);
+		organismeRepository.deleteById(id);
 	}
 
 }

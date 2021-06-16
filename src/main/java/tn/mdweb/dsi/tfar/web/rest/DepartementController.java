@@ -12,68 +12,55 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 //import io.swagger.v3.oas.annotations.parameters.RequestBody;
-
-import tn.mdweb.dsi.tfar.converter.ServiceConverter;
-
-import tn.mdweb.dsi.tfar.domain.dto.ServiceDto;
-
-import tn.mdweb.dsi.tfar.domain.entity.Service1;
-
-import tn.mdweb.dsi.tfar.service.ServiceService;
+import tn.mdweb.dsi.tfar.domain.entity.Departement;
+import tn.mdweb.dsi.tfar.service.DepartementService;
 
 @RestController
-@RequestMapping("/api/serviceDtos")
-public class ServiceController {
+@RequestMapping("/api/departements")
+public class DepartementController {
 
 	@Autowired
-	private ServiceService serviceService;
+	private DepartementService departementService;
 
-	@Autowired
-	private ServiceConverter serviceConverter;
-
-	// get all serviceDtos
+	// get all departements
 	@GetMapping("/findAll")
-	public List<ServiceDto> getAllServiceDtos() {
+	public List<Departement> getAllDepartements() {
 
-		List<Service1> findAll = serviceService.listAll();
-		return serviceConverter.entityToDto(findAll);
+		List<Departement> findAll = departementService.listAll();
+		return findAll;
 	}
 
-	// get serviceDto by code
+	// get departement by code
 	@GetMapping("/find/{code}")
-	public ServiceDto getServiceDtoById(@PathVariable(value = "code") long id) {
-		Service1 service = serviceService.get(id);
-		return serviceConverter.entityToDto(service);
+	public Departement getDepartementById(@PathVariable(value = "code") long id) {
+		Departement departement = departementService.get(id);
+		return departement;
 	}
 
-	// create service
+	// create departement
 	@PostMapping("/save")
-	public ServiceDto save(@RequestBody ServiceDto serviceDto) {
-		Service1 service = serviceConverter.dtoToEntity(serviceDto);
-		service = serviceService.save(service);
-		return serviceConverter.entityToDto(service);
+	public Departement save(@RequestBody Departement departement) {
+		return departementService.save(departement);
 	}
 	
 
 	
-	// update service
+	// update departement
 	@PutMapping("/save/{code}")
-	public ServiceDto updateService(@RequestBody ServiceDto serviceDto, @PathVariable("code") long id) {
-		Service1 existingservice = serviceService.get(id);
-		existingservice.setNom(serviceDto.getNom());
-		existingservice = serviceService.save(existingservice);
-		return serviceConverter.entityToDto(existingservice);
+	public Departement updateDepartement(@RequestBody Departement departement, @PathVariable("code") long id) {
+		Departement existingdepartement = departementService.get(id);
+		existingdepartement.setNom(departement.getNom());
+		return departementService.save(existingdepartement);
 	}
 	
 	
-	// delete service by code
+	// delete departement by code
 		@DeleteMapping("delete/{code}")
-		public String deleteService(@PathVariable("code") long id) {
-			Service1 existingservice = serviceService.get(id);
-			serviceService.delete(id);
-			return existingservice.toString() + " " + "is deleted";
+		public String deleteDepartement(@PathVariable("code") long id) {
+			Departement existingdepartement = departementService.get(id);
+			departementService.delete(id);
+			return existingdepartement.toString() + " is deleted";
 		}
 
 }

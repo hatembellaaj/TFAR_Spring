@@ -1,7 +1,7 @@
 package tn.mdweb.dsi.tfar.enumeration;
 
-public enum Role {
+public enum RoleType {
 
-	Ref, Part, Admin, ROLE_ADMIN, ROLE_USER
+	Admin, Referent, Participant, Invite
 
 }

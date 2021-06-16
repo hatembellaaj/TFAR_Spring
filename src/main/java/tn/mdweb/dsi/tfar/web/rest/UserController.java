@@ -11,77 +11,68 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tn.mdweb.dsi.tfar.converter.MedecinConverter;
-import tn.mdweb.dsi.tfar.domain.dto.MedecinDto;
-import tn.mdweb.dsi.tfar.domain.entity.Medecin;
-import tn.mdweb.dsi.tfar.service.MedecinService;
+import tn.mdweb.dsi.tfar.domain.entity.User;
+import tn.mdweb.dsi.tfar.service.UserService;
 
 
 @RestController
-@RequestMapping("/api/medecinDtos")
-public class MedecinController {
+@RequestMapping("/api/users")
+public class UserController {
 	
 	@Autowired
-	private MedecinService medecinService;
+	private UserService userService;
 
-	@Autowired
-	private MedecinConverter  medecinConverter;
-
-	// get all medecinDtos
+	// get all users
 	@GetMapping("/findAll")
-	public List<MedecinDto> getAllMedecinDtos() {
-
-		List<Medecin> findAll = medecinService.listAll();
-		return medecinConverter.entityToDto(findAll);
+	public List<User> getAllUsers() {
+		List<User> findAll = userService.listAll();
+		return findAll;
 	}
 
-	// get medecinDto by cin
-	@GetMapping("/find/{cin}")
-	public MedecinDto getMedecinDtoById(@PathVariable(value = "cin") Long id) {
-		Medecin patient = medecinService.get(id);
-		return medecinConverter.entityToDto(patient);
+	// get user by code
+	@GetMapping("/find/{code}")
+	public User getUserById(@PathVariable(value = "code") Long id) {
+		User user = userService.get(id);
+		return user;
 	}
 
-	// create medecin
+	// create user
 	@PostMapping("/save")
-	public MedecinDto save(@RequestBody MedecinDto medecinDto) throws Exception {
-		Medecin medecin = medecinConverter.dtoToEntity(medecinDto);
-		medecin = medecinService.save(medecin);
-		return medecinConverter.entityToDto(medecin);
+	public User save(@RequestBody User user) throws Exception {
+		return userService.save(user);
 	}
 
-	// update medecin
-	@PutMapping("/save/{cin}")
-	public MedecinDto updateMedecin(@RequestBody MedecinDto medecinDto,
-			@PathVariable("cin") Long id) throws Exception {
-		Medecin existingmedecin = medecinService.get(id);
-		existingmedecin.setNom(medecinDto.getNom());
-		existingmedecin.setPrenom(medecinDto.getPrenom());
-		existingmedecin.setGrade(medecinDto.getGrade());
-		existingmedecin.setType(medecinDto.getType());
-		existingmedecin.setGouvernorat(medecinDto.getGouvernorat());
-		existingmedecin.setAdresse(medecinDto.getAdresse());
-		existingmedecin.setTel(medecinDto.getTel());
-		existingmedecin.setPoste(medecinDto.getPoste());
-		existingmedecin.setFax(medecinDto.getFax());
-		existingmedecin.setEmail(medecinDto.getEmail());
-		existingmedecin.setImage(medecinDto.getImage());
-		existingmedecin.setLogin(medecinDto.getLogin());
-		existingmedecin.setPassword(medecinDto.getPassword());
-		existingmedecin.setUrl(medecinDto.getUrl());
-		existingmedecin.setHopital(medecinDto.getHopital());
-		existingmedecin.setService1(medecinDto.getService1());
-
-		existingmedecin = medecinService.save(existingmedecin);
-		return medecinConverter.entityToDto(existingmedecin);
+	// update user
+	@PutMapping("/save/{code}")
+	public User updateUser(@RequestBody User user,
+			@PathVariable("code") Long id) throws Exception {
+		User existinguser = userService.get(id);
+		existinguser.setRole(user.getRole());
+		existinguser.setType(user.getType());
+		existinguser.setNom(user.getNom());
+		existinguser.setPrenom(user.getPrenom());
+		existinguser.setGrade(user.getGrade());
+		existinguser.setGouvernorat(user.getGouvernorat());
+		existinguser.setAdresse(user.getAdresse());
+		existinguser.setTel(user.getTel());
+		existinguser.setEmail(user.getEmail());
+		existinguser.setPhoto(user.getPhoto());
+		existinguser.setPoste(user.getPoste());
+		existinguser.setFax(user.getFax());
+		existinguser.setLogin(user.getLogin());
+		existinguser.setPassword(user.getPassword());
+		existinguser.setUrl(user.getUrl());
+		existinguser.setOrganisme(user.getOrganisme());
+		existinguser.setDepartement(user.getDepartement());
+		return userService.save(existinguser);
 	}
 
-	// delete medecin by cin
-	@DeleteMapping("delete/{cin}")
-	public String deleteMedecin(@PathVariable("cin") Long id) {
-		Medecin existingmedecin = medecinService.get(id);
-		medecinService.delete(id);
-		return existingmedecin.toString() + " " + "is deleted";
+	// delete user by code
+	@DeleteMapping("delete/{code}")
+	public String deleteUser(@PathVariable("code") Long id) {
+		User existinguser = userService.get(id);
+		userService.delete(id);
+		return existinguser.toString() +  " is deleted";
 	}
 
 }
