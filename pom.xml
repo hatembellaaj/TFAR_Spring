@@ -76,6 +76,9 @@
 		<properties-maven-plugin.version>1.0.0</properties-maven-plugin.version>
 		<sonar-maven-plugin.version>3.8.0.2131</sonar-maven-plugin.version>
 		<!-- jhipster-needle-maven-property -->
+		
+		
+		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
 	</properties>
 
 	<dependencyManagement>
@@ -260,9 +263,6 @@
 			<version>${archunit-junit5.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- Adding the engine dependency to the surefire-plugin unfortunately 
-			does not work in the current version. -->
-		<!-- https://www.archunit.org/userguide/html/000_Index.html#_junit_5 -->
 		<dependency>
 			<groupId>com.tngtech.archunit</groupId>
 			<artifactId>archunit-junit5-engine</artifactId>
@@ -338,6 +338,18 @@
 			<version>2.3.5</version>
 		</dependency>
 
+		<dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${org.mapstruct.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.20</version>
+            <scope>provided</scope>
+        </dependency>
 
 	</dependencies>
 
@@ -405,6 +417,24 @@
 				<artifactId>properties-maven-plugin</artifactId>
 			</plugin>
 			<!-- jhipster-needle-maven-add-plugin -->
+			
+			<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+                <source>1.8</source> <!-- depending on your project -->
+                <target>1.8</target> <!-- depending on your project -->
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>org.mapstruct</groupId>
+                        <artifactId>mapstruct-processor</artifactId>
+                        <version>${org.mapstruct.version}</version>
+                    </path>
+                    <!-- other annotation processors -->
+                </annotationProcessorPaths>
+            </configuration>
+        </plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>

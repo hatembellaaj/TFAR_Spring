@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import tn.mdweb.dsi.tfar.converter.OrganismeConverter;
+import tn.mdweb.dsi.tfar.domain.dto.OrganismeDto;
 //import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import tn.mdweb.dsi.tfar.domain.entity.Organisme;
+import tn.mdweb.dsi.tfar.enumeration.OrganismeType;
 import tn.mdweb.dsi.tfar.service.OrganismeService;
 
 @RestController
@@ -21,42 +25,49 @@ public class OrganismeController {
 
 	@Autowired
 	private OrganismeService organismeService;
+	
+	@Autowired
+	private OrganismeConverter organismeConverter;
 
-	// get all organismes
+	// get all organismesDto
 	@GetMapping("/findAll")
-	public List<Organisme> getAllOrganismes() {
+	public List<OrganismeDto> getAllOrganismes() {
 		List<Organisme> findAll = organismeService.listAll();
-		return findAll;
+		return organismeConverter.entityToDto(findAll);
 	}
 
-	// get organisme by code
+	// get organismeDto by code
 	@GetMapping("/find/{code}")
-	public Organisme getOrganismeById(@PathVariable(value = "code") long id) {
+	public OrganismeDto getOrganismeDtoById(@PathVariable(value = "code") long id) {
 		Organisme organisme = organismeService.get(id);
-		return organisme;
+		return organismeConverter.entityToDto(organisme);
 	}
 
-	// create organisme
+	// create organismeDto
 	@PostMapping("/save")
-	public Organisme save(@RequestBody Organisme organisme) {
-		return organismeService.save(organisme);
+	public OrganismeDto save(@RequestBody OrganismeDto organismeDto) {
+		return organismeConverter.entityToDto(organismeService.save(organismeConverter.dtoToEntity(organismeDto)));
+
 	}
 
-	// update organisme
+	// update organismeDto
 	@PutMapping("/save/{code}")
-	public Organisme updateOrganisme(@RequestBody Organisme organisme, @PathVariable("code") long id) {
+	public OrganismeDto updateOrganismeDto(@RequestBody OrganismeDto organismeDto, @PathVariable("code") long id) {
 		Organisme existingorganisme = organismeService.get(id);
-		existingorganisme.setNom(organisme.getNom());
-		existingorganisme.setAdresse(organisme.getAdresse());
-		existingorganisme.setTel(organisme.getTel());
-		existingorganisme.setContact(organisme.getContact());
-		existingorganisme.setEmail(organisme.getEmail());
-		existingorganisme.setType(organisme.getType());
-		return organismeService.save(existingorganisme);
+		existingorganisme.setNom(organismeDto.getNom());
+		existingorganisme.setAdresse(organismeDto.getAdresse());
+		existingorganisme.setTel(organismeDto.getTel());
+		existingorganisme.setContact(organismeDto.getContact());
+		existingorganisme.setEmail(organismeDto.getEmail());
+		//existingorganisme.setType(OrganismeType.valueOf(organismeDto.getType()));
+		
+		existingorganisme.setType(organismeDto.getType());
+		
+		return organismeConverter.entityToDto(organismeService.save(existingorganisme));
 	}
 
 
-	// delete organisme by code
+	// delete organismeDto by code
 	@DeleteMapping("delete/{code}")
 	public String deleteOrganisme(@PathVariable("code") long id) {
 		Organisme existingorganisme = organismeService.get(id);

@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import tn.mdweb.dsi.tfar.converter.RoleConverter;
+import tn.mdweb.dsi.tfar.domain.dto.RoleDto;
 import tn.mdweb.dsi.tfar.domain.entity.Role;
+import tn.mdweb.dsi.tfar.domain.entity.User;
 import tn.mdweb.dsi.tfar.service.RoleService;
 
 @RestController
@@ -21,35 +25,39 @@ public class RoleController {
 	@Autowired
 	private RoleService roleService;
 
-	// get all roles
+	@Autowired
+	private RoleConverter roleConverter;
+	
+	// get all rolesDto
 	@GetMapping("/findAll")
-	public List<Role> getAllRoles() {
+	public List<RoleDto> getAllRoles() {
 		List<Role> findAll = roleService.listAll();
-		return findAll;
+		return roleConverter.entityToDto(findAll);
 	}
 
-	// get role by idRole
+	// get roleDto by idRole
 	@GetMapping("/find/{idRole}")
-	public Role getRoleById(@PathVariable(value = "idRole") Long id) {
+	public RoleDto getRoleById(@PathVariable(value = "idRole") Long id) {
 		Role role = roleService.get(id);
-		return role;
+		return roleConverter.entityToDto(role);
 	}
 
-	// create role
+	// create roleDto
 	@PostMapping("/save")
-	public Role save(@RequestBody Role role) throws Exception {
-		return roleService.save(role);
+	public RoleDto save(@RequestBody RoleDto roleDto) throws Exception {
+		return roleConverter.entityToDto(roleService.save(roleDto));
 	}
 
-	// update role
+	// update roleDto
 	@PutMapping("/save/{idRole}")
-	public Role updateRole(@RequestBody Role role, @PathVariable("idRole") Long id) throws Exception {
+	public RoleDto updateRoleDto(@RequestBody RoleDto roleDto, @PathVariable("idRole") Long id) throws Exception {
 		Role existingrole = roleService.get(id);
-		existingrole.setTitre(role.getTitre());
-		existingrole.setDescription(role.getDescription());
-		existingrole.setDeleted(role.getDeleted());
-		existingrole.setUser(role.getUser());
-		return roleService.save(existingrole);
+		existingrole.setTitre(roleDto.getTitre());
+		existingrole.setDescription(roleDto.getDescription());
+		existingrole.setDeleted(roleDto.getDeleted());
+		existingrole.setUser(new User(roleDto.getCodeUser()));
+		RoleDto x=roleConverter.entityToDto(existingrole);
+		return roleConverter.entityToDto(roleService.save(x));
 	}
 
 	// delete role by idRole

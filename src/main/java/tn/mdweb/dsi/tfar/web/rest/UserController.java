@@ -11,7 +11,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import tn.mdweb.dsi.tfar.converter.UserConverter;
+import tn.mdweb.dsi.tfar.domain.dto.UserDto;
+import tn.mdweb.dsi.tfar.domain.entity.Departement;
+import tn.mdweb.dsi.tfar.domain.entity.Organisme;
 import tn.mdweb.dsi.tfar.domain.entity.User;
+import tn.mdweb.dsi.tfar.enumeration.Gouvernorat;
+import tn.mdweb.dsi.tfar.enumeration.RoleType;
+import tn.mdweb.dsi.tfar.enumeration.TypeUser;
 import tn.mdweb.dsi.tfar.service.UserService;
 
 
@@ -21,50 +29,60 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserConverter userConverter;
 
 	// get all users
 	@GetMapping("/findAll")
-	public List<User> getAllUsers() {
+	public List<UserDto> getAllUsers() {
 		List<User> findAll = userService.listAll();
-		return findAll;
+		return userConverter.entityToDto(findAll);
 	}
 
 	// get user by code
 	@GetMapping("/find/{code}")
-	public User getUserById(@PathVariable(value = "code") Long id) {
+	public UserDto getUserById(@PathVariable(value = "code") Long id) {
 		User user = userService.get(id);
-		return user;
+		return userConverter.entityToDto(user);
 	}
 
 	// create user
 	@PostMapping("/save")
-	public User save(@RequestBody User user) throws Exception {
-		return userService.save(user);
+	public UserDto save(@RequestBody UserDto userDto) throws Exception {
+		return userConverter.entityToDto(userService.save(userDto));
 	}
 
 	// update user
 	@PutMapping("/save/{code}")
-	public User updateUser(@RequestBody User user,
+	public UserDto updateUser(@RequestBody UserDto userDto,
 			@PathVariable("code") Long id) throws Exception {
 		User existinguser = userService.get(id);
-		existinguser.setRole(user.getRole());
-		existinguser.setType(user.getType());
-		existinguser.setNom(user.getNom());
-		existinguser.setPrenom(user.getPrenom());
-		existinguser.setGrade(user.getGrade());
-		existinguser.setGouvernorat(user.getGouvernorat());
-		existinguser.setAdresse(user.getAdresse());
-		existinguser.setTel(user.getTel());
-		existinguser.setEmail(user.getEmail());
-		existinguser.setPhoto(user.getPhoto());
-		existinguser.setPoste(user.getPoste());
-		existinguser.setFax(user.getFax());
-		existinguser.setLogin(user.getLogin());
-		existinguser.setPassword(user.getPassword());
-		existinguser.setUrl(user.getUrl());
-		existinguser.setOrganisme(user.getOrganisme());
-		existinguser.setDepartement(user.getDepartement());
-		return userService.save(existinguser);
+		/*existinguser.setRole(RoleType.valueOf(userDto.getRole()));
+		existinguser.setType(TypeUser.valueOf(userDto.getType()));*/
+		
+		existinguser.setRole(userDto.getRole());
+		existinguser.setType(userDto.getType());
+		existinguser.setNom(userDto.getNom());
+		existinguser.setPrenom(userDto.getPrenom());
+		existinguser.setGrade(userDto.getGrade());
+		
+		/*existinguser.setGouvernorat(Gouvernorat.valueOf(userDto.getGouvernorat()));*/
+		
+		existinguser.setGouvernorat(userDto.getGouvernorat());
+		existinguser.setAdresse(userDto.getAdresse());
+		existinguser.setTel(userDto.getTel());
+		existinguser.setEmail(userDto.getEmail());
+		existinguser.setPhoto(userDto.getPhoto());
+		existinguser.setPoste(userDto.getPoste());
+		existinguser.setFax(userDto.getFax());
+		existinguser.setLogin(userDto.getLogin());
+		existinguser.setPassword(userDto.getPassword());
+		existinguser.setUrl(userDto.getUrl());
+		existinguser.setOrganisme(new Organisme(userDto.getCodeOrganisme()));
+		existinguser.setDepartement(new Departement(userDto.getCodeDepartement()));
+		UserDto x=userConverter.entityToDto(existinguser);
+		return userConverter.entityToDto(userService.save(x));
 	}
 
 	// delete user by code

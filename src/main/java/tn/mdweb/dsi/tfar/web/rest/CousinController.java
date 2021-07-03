@@ -3,17 +3,20 @@ package tn.mdweb.dsi.tfar.web.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import tn.mdweb.dsi.tfar.converter.CousinConverter;
+import tn.mdweb.dsi.tfar.domain.dto.CousinDto;
 import tn.mdweb.dsi.tfar.domain.entity.Cousin;
+import tn.mdweb.dsi.tfar.domain.entity.Fiche;
+import tn.mdweb.dsi.tfar.enumeration.PlaceCousin;
+import tn.mdweb.dsi.tfar.enumeration.Sexe;
 import tn.mdweb.dsi.tfar.service.CousinService;
 
 @RestController
@@ -22,51 +25,52 @@ public class CousinController {
 	
 	@Autowired
 	private CousinService cousinService;
+	
+	@Autowired
+	private CousinConverter cousinConverter;
 
-	// get all cousins
+	// get all cousinsDto
 	@GetMapping("/findAll")
-	public List<Cousin> getAllCousins() {
+	public List<CousinDto> getAllCousinsDto() {
 		List<Cousin> findAll = cousinService.listAll();
-		return findAll;
+		return cousinConverter.entityToDto(findAll);
 	}
 
-	// get cousin by cousinId
-	@GetMapping("/find")
-	@ResponseStatus(HttpStatus.OK)
-	public Cousin getCousinByCompositeId(@RequestParam(name = "nDossierC") String nDossierC,
-			@RequestParam(name = "idC") Long idC) {
-		Cousin cousin = cousinService.get(nDossierC, idC);
-		return cousin;
-	}
+	// get cousinsDto by cousinId
+		@GetMapping("/find/{cousinId}")
+		public CousinDto getCousinDtoById(@PathVariable(value = "cousinId") long id) {
+			Cousin cousin = cousinService.get(id);
+			return cousinConverter.entityToDto(cousin);
+		}
 
-	// create cousin
-	@PostMapping("/save")
-	public Cousin save(@RequestBody Cousin cousin) throws Exception {
-		return cousinService.save(cousin);
-	}
+		// create cousinsDto
+		@PostMapping("/save")
+		public CousinDto save(@RequestBody CousinDto cousinDto)  throws Exception {
+			return cousinConverter.entityToDto(cousinService.save(cousinDto));
+		}
 
-	// update cousin
-	@PutMapping("/update")
-	public Cousin updateCousin(@RequestBody Cousin cousin,
-			@RequestParam(name = "nDossierC") String nDossierC, @RequestParam(name = "idC") Long idC)
-			throws Exception {
-		Cousin existingcousin = cousinService.get(nDossierC, idC);
-		existingcousin.setNom(cousin.getNom());
-		existingcousin.setPrenom(cousin.getPrenom());
-		existingcousin.setPlaceCousin(cousin.getPlaceCousin());
-		existingcousin.setSexe(cousin.getSexe());
-		existingcousin.setFiche(cousin.getFiche());
-		return cousinService.save(existingcousin);
-	}
+		// update cousinsDto
+		@PutMapping("/save/{id}")
+		public CousinDto updateCousinDto(@RequestBody CousinDto cousinDto, @PathVariable("id") long id)  throws Exception {
+			Cousin existingcousin = cousinService.get(id);
+			
+			existingcousin.setNom(cousinDto.getNom());
+			existingcousin.setPrenom(cousinDto.getPrenom());
+			existingcousin.setPlaceCousin(PlaceCousin.valueOf(cousinDto.getPlaceCousin()));
+			existingcousin.setSexe(Sexe.valueOf(cousinDto.getSexe()));
+			existingcousin.setFiche(new Fiche(cousinDto.getNDFiche()));
+	
+			CousinDto a=cousinConverter.entityToDto(existingcousin);
+			return cousinConverter.entityToDto(cousinService.save(a));
+		}
 
-	// delete cousin
-	@DeleteMapping("/delete")
-	public String deleteCousin(@RequestParam(name = "nDossierC") String nDossierC,
-			@RequestParam(name = "idC") Long idC) {
-		Cousin existingcousin = cousinService.get(nDossierC,idC);
-		cousinService.delete(nDossierC,idC);
-		return existingcousin.toString() + " is deleted";
-	}
+		// delete cousin by cousinId
+				@DeleteMapping("delete/{cousinId}")
+				public String deleteCousin(@PathVariable("cousinId") long id) {
+					Cousin existingcousin = cousinService.get(id);
+					cousinService.delete(id);
+					return existingcousin.toString() + " is deleted";
+				}
 
 	
 

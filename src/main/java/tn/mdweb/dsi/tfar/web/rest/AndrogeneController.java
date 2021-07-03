@@ -11,7 +11,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import tn.mdweb.dsi.tfar.converter.AndrogeneConverter;
+import tn.mdweb.dsi.tfar.domain.dto.AndrogeneDto;
 import tn.mdweb.dsi.tfar.domain.entity.Androgene;
+import tn.mdweb.dsi.tfar.domain.entity.Fiche;
+import tn.mdweb.dsi.tfar.enumeration.Mois;
+import tn.mdweb.dsi.tfar.enumeration.Reponse;
 import tn.mdweb.dsi.tfar.service.AndrogeneService;
 
 @RestController
@@ -20,38 +26,42 @@ public class AndrogeneController {
 	
 	@Autowired
 	private AndrogeneService androgeneService;
+	
+	@Autowired
+	private AndrogeneConverter androgeneConverter;
 
-	// get all androgenes
+	// get all androgenesDto
 	@GetMapping("/findAll")
-	public List<Androgene> getAllAndrogenes() {
+	public List<AndrogeneDto> getAllAndrogenesDto() {
 
 		List<Androgene> findAll = androgeneService.listAll();
-		return findAll;
+		return androgeneConverter.entityToDto(findAll);
 	}
 
-	// get androgene by id
+	// get androgeneDto by id
 	@GetMapping("/find/{id}")
-	public Androgene getAndrogeneById(@PathVariable(value = "id") long id) {
+	public AndrogeneDto getAndrogeneDtoById(@PathVariable(value = "id") long id) {
 		Androgene androgene = androgeneService.get(id);
-		return androgene;
+		return androgeneConverter.entityToDto(androgene);
 	}
 
-	// create androgene
+	// create androgeneDto
 	@PostMapping("/save")
-	public Androgene save(@RequestBody Androgene androgene) {
-		return androgeneService.save(androgene);
+	public AndrogeneDto save(@RequestBody AndrogeneDto androgeneDto)  throws Exception {
+		return androgeneConverter.entityToDto(androgeneService.save(androgeneDto));
 	}
 	
 
 	
-	// update androgene
+	// update androgeneDto
 	@PutMapping("/save/{id}")
-	public Androgene updateAndrogene(@RequestBody Androgene androgene, @PathVariable("id") long id) {
+	public AndrogeneDto updateAndrogeneDto(@RequestBody AndrogeneDto androgeneDto, @PathVariable("id") long id)  throws Exception {
 		Androgene existingandrogene = androgeneService.get(id);
-		existingandrogene.setMois(androgene.getMois());
-		existingandrogene.setReponse(androgene.getReponse());
-		existingandrogene.setFiche(androgene.getFiche());
-		return androgeneService.save(existingandrogene);
+		existingandrogene.setMois(Mois.valueOf(androgeneDto.getMois()));
+		existingandrogene.setReponse(Reponse.valueOf(androgeneDto.getReponse()));
+		existingandrogene.setFiche(new Fiche(androgeneDto.getNDossierFiche()));
+		AndrogeneDto a=androgeneConverter.entityToDto(existingandrogene);
+		return androgeneConverter.entityToDto(androgeneService.save(a));
 	}
 	
 	

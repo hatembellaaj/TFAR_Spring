@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import tn.mdweb.dsi.tfar.converter.LaboratoireConverter;
+import tn.mdweb.dsi.tfar.domain.dto.LaboratoireDto;
 import tn.mdweb.dsi.tfar.domain.entity.Laboratoire;
 import tn.mdweb.dsi.tfar.service.LaboratoireService;
 
@@ -20,35 +23,38 @@ public class LaboratoireController {
 	
 	@Autowired
 	private LaboratoireService laboratoireService;
+	
+	@Autowired
+	private LaboratoireConverter laboratoireConverter;
 
-	// get all laboratoires
+	// get all laboratoiresDto
 	@GetMapping("/findAll")
-	public List<Laboratoire> getAllLaboratoires() {
+	public List<LaboratoireDto> getAllLaboratoiresDto() {
 		List<Laboratoire> findAll = laboratoireService.listAll();
-		return findAll;
+		return laboratoireConverter.entityToDto(findAll);
 	}
 
 	// get laboratoireDto by id
 	@GetMapping("/find/{id}")
-	public Laboratoire getLaboratoireById(@PathVariable(value = "id") long id) {
+	public LaboratoireDto getLaboratoireDtoById(@PathVariable(value = "id") long id) {
 		Laboratoire laboratoire = laboratoireService.get(id);
-		return laboratoire;
+		return  laboratoireConverter.entityToDto(laboratoire);
 	}
 
-	// create laboratoire
+	// create laboratoireDto
 	@PostMapping("/save")
-	public Laboratoire save(@RequestBody Laboratoire laboratoire) {
-		return laboratoireService.save(laboratoire);
+	public LaboratoireDto save(@RequestBody LaboratoireDto laboratoireDto) {
+		return laboratoireConverter.entityToDto(laboratoireService.save(laboratoireConverter.dtoToEntity(laboratoireDto)));
 	}
 	
 
 	
-	// update laboratoire
+	// update laboratoireDto
 	@PutMapping("/save/{id}")
-	public Laboratoire updateLaboratoire(@RequestBody Laboratoire laboratoire, @PathVariable("id") long id) {
+	public LaboratoireDto updateLaboratoireDto(@RequestBody LaboratoireDto laboratoireDto, @PathVariable("id") long id) {
 		Laboratoire existinglaboratoire = laboratoireService.get(id);
-		existinglaboratoire.setNom(laboratoire.getNom());
-		return laboratoireService.save(existinglaboratoire);
+		existinglaboratoire.setNom(laboratoireDto.getNom());
+		return laboratoireConverter.entityToDto(laboratoireService.save(existinglaboratoire));
 	}
 	
 	

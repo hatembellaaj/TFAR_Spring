@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import tn.mdweb.dsi.tfar.converter.FicheConverter;
+import tn.mdweb.dsi.tfar.domain.dto.FicheDto;
 import tn.mdweb.dsi.tfar.domain.entity.Fiche;
 import tn.mdweb.dsi.tfar.service.FicheService;
 
@@ -20,35 +23,38 @@ public class FicheController {
 	
 	@Autowired
 	private FicheService ficheService;
+	
+	@Autowired
+	private FicheConverter ficheConverter;
 
 	// get all fiches
 	@GetMapping("/findAll")
-	public List<Fiche> getAllFiches() {
+	public List<FicheDto> getAllFiches() {
 		List<Fiche> findAll = ficheService.listAll();
-		return findAll;
+		return ficheConverter.toDto(findAll);
 	}
 
 	// get fiche by nDossierFiche
 		@GetMapping("/find/{nDossierFiche}")
-		public Fiche getFicheById(@PathVariable(value = "nDossierFiche") String id) {
+		public FicheDto getFicheDtoById(@PathVariable(value = "nDossierFiche") String id) {
 			Fiche fiche = ficheService.get(id);
-			return fiche;
+			return ficheConverter.toDto(fiche);
 		}
 
-		// create fiche
-		@PostMapping("/save")
-		public Fiche save(@RequestBody Fiche fiche) {
-			return ficheService.save(fiche);
+		// create ficheDto
+		@PostMapping("/save") 
+		public FicheDto save(@RequestBody FicheDto ficheDto)  throws Exception{
+			return ficheConverter.toDto(ficheService.save(ficheDto));
 		}
 		
 
 		
-		// update fiche
+		// update ficheDto
 		@PutMapping("/save/{nDossierFiche}")
-		public Fiche updateFiche(@RequestBody Fiche fiche, @PathVariable("nDossierFiche") String id) {
-			Fiche ficheupdate = fiche;
-			ficheupdate.setnDossierFiche(id);
-			return ficheService.save(ficheupdate);
+		public FicheDto updateFiche(@RequestBody FicheDto ficheDto, @PathVariable("nDossierFiche") String id) throws Exception{
+			FicheDto ficheupdate = ficheDto;
+			ficheupdate.setNDossierFiche(id);
+			return ficheConverter.toDto(ficheService.save(ficheupdate));
 		}
 		
 		

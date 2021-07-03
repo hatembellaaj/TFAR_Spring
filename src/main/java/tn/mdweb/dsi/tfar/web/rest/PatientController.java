@@ -5,16 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import tn.mdweb.dsi.tfar.converter.PatientConverter;
+import tn.mdweb.dsi.tfar.domain.dto.PatientDto;
+import tn.mdweb.dsi.tfar.domain.entity.Fiche;
 import tn.mdweb.dsi.tfar.domain.entity.Patient;
+import tn.mdweb.dsi.tfar.enumeration.Gouvernorat;
+import tn.mdweb.dsi.tfar.enumeration.Sexe;
 import tn.mdweb.dsi.tfar.service.PatientService;
-import org.springframework.http.HttpStatus;
+
 
 @RestController
 @RequestMapping("/api/patients")
@@ -22,61 +26,63 @@ public class PatientController {
 
 	@Autowired
 	private PatientService patientService;
+	
+	@Autowired
+	private PatientConverter patientConverter;
 
-	// get all patients
+	// get all patientsDto
 	@GetMapping("/findAll")
-	public List<Patient> getAllPatients() {
+	public List<PatientDto> getAllPatientsDto() {
 
 		List<Patient> findAll = patientService.listAll();
-		return findAll;
+		return patientConverter.entityToDto(findAll);
 	}
 
-	// get patient by patientId
-	@GetMapping("/find")
-	@ResponseStatus(HttpStatus.OK)
-	public Patient getPatientByCompositeId(@RequestParam(name = "nDossierP") String nDossierP,
-			@RequestParam(name = "idP") Long idP) {
-		Patient patient = patientService.get(nDossierP, idP);
-		return patient;
-	}
+	// get patientDto by nDPatient
+		@GetMapping("/find/{nDPatient}")
+		public PatientDto getUserById(@PathVariable(value = "nDPatient") String id) {
+			Patient patient = patientService.get(id);
+			return patientConverter.entityToDto(patient);
+		}
 
-	// create patient
-	@PostMapping("/save")
-	public Patient save(@RequestBody Patient patient) throws Exception {
-		return patientService.save(patient);
-	}
+		// create PatientDto
+		@PostMapping("/save")
+		public PatientDto save(@RequestBody PatientDto patientDto) throws Exception {
+			return patientConverter.entityToDto(patientService.save(patientDto));
+		}
 
-	// update patient
-	@PutMapping("/update")
-	public Patient updatePatient(@RequestBody Patient patient,
-			@RequestParam(name = "nDossierP") String nDossierP, @RequestParam(name = "idP") Long idP)
-			throws Exception {
-		Patient existingpatient = patientService.get(nDossierP, idP);
-		existingpatient.setNom(patient.getNom());
-		existingpatient.setPrenom(patient.getPrenom());
-		existingpatient.setDateNaissance(patient.getDateNaissance());
-		existingpatient.setLieuNaissance(patient.getLieuNaissance());
-		existingpatient.setSexe(patient.getSexe());
-		existingpatient.setGouvernorat(patient.getGouvernorat());
-		existingpatient.setAdresse(patient.getAdresse());
-		existingpatient.setReperes(patient.getReperes());
-		existingpatient.setTel(patient.getTel());
-		existingpatient.setPrenomPere(patient.getPrenomPere());
-		existingpatient.setNomMere(patient.getNomMere());
-		existingpatient.setPrenomMere(patient.getPrenomMere());
-		existingpatient.setNomGmp(patient.getNomGmp());
-		existingpatient.setNomGmm(patient.getNomGmm());
-		existingpatient.setAge(patient.getAge());
-		return patientService.save(existingpatient);
-	}
+		// update user
+		@PutMapping("/save/{nDPatient}")
+		public PatientDto updateUser(@RequestBody PatientDto patientDto,
+				@PathVariable("nDPatient") String id) throws Exception {
+			Patient existingpatient = patientService.get(id);
+			existingpatient.setNom(patientDto.getNom());
+			existingpatient.setPrenom(patientDto.getPrenom());
+			existingpatient.setSexe(Sexe.valueOf(patientDto.getSexe()));
+			existingpatient.setDateNaissance(patientDto.getDateNaissance());
+			existingpatient.setLieuNaissance(patientDto.getLieuNaissance());
+			existingpatient.setAdresse(patientDto.getAdresse());
+			existingpatient.setReperes(patientDto.getReperes());
+			existingpatient.setGouvernorat(Gouvernorat.valueOf(patientDto.getGouvernorat()));
+			existingpatient.setTel(patientDto.getTel());
+			existingpatient.setPrenomPere(patientDto.getPrenomPere());
+			existingpatient.setNomMere(patientDto.getNomMere());
+			existingpatient.setPrenomMere(patientDto.getPrenomMere());
+			existingpatient.setNomGmp(patientDto.getNomGmp());
+			existingpatient.setNomGmm(patientDto.getNomGmm());
+			existingpatient.setAge(patientDto.getAge());
+			existingpatient.setFiche(new Fiche(patientDto.getNDFiche()));
+			
+			PatientDto x=patientConverter.entityToDto(existingpatient);
+			return patientConverter.entityToDto(patientService.save(x));
+		}
 
-	// delete patient
-	@DeleteMapping("/delete")
-	public String deletePatient(@RequestParam(name = "nDossierP") String nDossierP,
-			@RequestParam(name = "idP") Long idP) {
-		Patient existingpatient = patientService.get(nDossierP,idP);
-		patientService.delete(nDossierP,idP);
-		return existingpatient.toString() + " is deleted";
-	}
+		// delete Patient by nDPatient
+		@DeleteMapping("delete/{nDPatient}")
+		public String deleteUser(@PathVariable("nDPatient") String id) {
+			Patient existingpatient = patientService.get(id);
+			patientService.delete(id);
+			return existingpatient.toString() +  " is deleted";
+		}
 
 }

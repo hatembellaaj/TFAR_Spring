@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import tn.mdweb.dsi.tfar.converter.DepartementConverter;
+import tn.mdweb.dsi.tfar.domain.dto.DepartementDto;
 //import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import tn.mdweb.dsi.tfar.domain.entity.Departement;
 import tn.mdweb.dsi.tfar.service.DepartementService;
@@ -22,36 +25,39 @@ public class DepartementController {
 
 	@Autowired
 	private DepartementService departementService;
+	
+	@Autowired
+	private DepartementConverter departementConverter;
 
-	// get all departements
+	// get all departementsDto
 	@GetMapping("/findAll")
-	public List<Departement> getAllDepartements() {
+	public List<DepartementDto> getAllDepartementsDto() {
 
 		List<Departement> findAll = departementService.listAll();
-		return findAll;
+		return departementConverter.entityToDto(findAll);
 	}
 
-	// get departement by code
+	// get departementDto by code
 	@GetMapping("/find/{code}")
-	public Departement getDepartementById(@PathVariable(value = "code") long id) {
+	public DepartementDto getDepartementDtoById(@PathVariable(value = "code") long id) {
 		Departement departement = departementService.get(id);
-		return departement;
+		return departementConverter.entityToDto(departement);
 	}
 
-	// create departement
+	// create departementDto
 	@PostMapping("/save")
-	public Departement save(@RequestBody Departement departement) {
-		return departementService.save(departement);
+	public DepartementDto save(@RequestBody DepartementDto departementDto) {
+		return departementConverter.entityToDto(departementService.save(departementConverter.dtoToEntity(departementDto)));
 	}
 	
 
 	
-	// update departement
+	// update departementDto
 	@PutMapping("/save/{code}")
-	public Departement updateDepartement(@RequestBody Departement departement, @PathVariable("code") long id) {
+	public DepartementDto updateDepartementDto(@RequestBody DepartementDto departementDto, @PathVariable("code") long id) {
 		Departement existingdepartement = departementService.get(id);
-		existingdepartement.setNom(departement.getNom());
-		return departementService.save(existingdepartement);
+		existingdepartement.setNom(departementDto.getNom());
+		return departementConverter.entityToDto(departementService.save(existingdepartement));
 	}
 	
 	
