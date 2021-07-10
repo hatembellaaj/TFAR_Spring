@@ -1,7 +1,7 @@
 package tn.mdweb.dsi.tfar.domain.dto;
 
 import java.util.Date;
-
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +29,9 @@ import tn.mdweb.dsi.tfar.enumeration.Toxicite;
 @Setter
 public class FicheDto {
 	
-
+	private Long idFiche;
+	
+	@NotNull
 	private String nDossierFiche;
 
 	private Date dateDiagnostique;

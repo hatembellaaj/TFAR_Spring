@@ -20,12 +20,12 @@ public interface FicheConverter extends IEntityMapper<FicheDto, Fiche>{
 
     List<Fiche> toEntity(final List <FicheDto> fichedtos);
 
-    default Fiche fromId(final String nDossierFiche) {
-        if (nDossierFiche == null) {
+    default Fiche fromId(final Long idFiche) {
+        if (idFiche == null) {
             return null;
         }
         final Fiche fiche=new Fiche();
-        fiche.setNDossierFiche(nDossierFiche);
+        fiche.setIdFiche(idFiche);
         return fiche;
     }
 	

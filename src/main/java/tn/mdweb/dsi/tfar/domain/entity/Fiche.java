@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -41,8 +43,13 @@ import tn.mdweb.dsi.tfar.enumeration.Toxicite;
 @Entity
 @Table(name = "fiche")
 public class Fiche {
-
+	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_fiche")
+	private Long idFiche;
+
+	
 	@Column(name = "n_dossier_fiche", length = 10)
 	private String nDossierFiche;
 
@@ -827,8 +834,10 @@ public class Fiche {
 	@JoinColumn(name = "code_user", referencedColumnName = "code")
 	private User user;
 
-	public Fiche(String nDossierFiche) {
-		this.nDossierFiche = nDossierFiche;
+	public Fiche(Long idFiche) {
+		this.idFiche = idFiche;
 	}
+
+	
 
 }

@@ -56,12 +56,15 @@ public class Organisme {
 	@Column(name = "type")
 	@Enumerated(EnumType.STRING)
 	private OrganismeType type;
-	
-	
 
-	public Organisme(Long code) {
+	public Organisme(Long code, @NotNull String nom) {
 		this.code = code;
+		this.nom = nom;
 	}
+
+	
+	
+	
 
 	
 	

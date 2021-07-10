@@ -63,7 +63,7 @@ public class FrereController {
 				existingfrere.setSexe(Sexe.valueOf(frereDto.getSexe()));
 				existingfrere.setDecedes(Decedes.valueOf(frereDto.getDecedes()));
 				existingfrere.setAge(frereDto.getAge());
-				existingfrere.setFiche(new Fiche(frereDto.getNDFiche()));
+				existingfrere.setFiche(new Fiche(frereDto.getIdFiche()));
 				FrereDto f=frereConverter.entityToDto(existingfrere);
 				return frereConverter.entityToDto(frereService.save(f));
 			}

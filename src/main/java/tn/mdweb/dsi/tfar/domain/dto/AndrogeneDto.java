@@ -17,6 +17,10 @@ public class AndrogeneDto {
 
 	private String reponse;
 	
-	private String nDossierFiche;
+	private Long idFiche;
+
+	
+	
+	
 
 }

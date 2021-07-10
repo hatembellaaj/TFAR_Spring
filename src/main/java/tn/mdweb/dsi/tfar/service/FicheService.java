@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import tn.mdweb.dsi.tfar.converter.FicheConverter;
 import tn.mdweb.dsi.tfar.domain.dto.FicheDto;
+import tn.mdweb.dsi.tfar.domain.dto.FicheListDto;
 import tn.mdweb.dsi.tfar.domain.entity.Fiche;
 import tn.mdweb.dsi.tfar.domain.entity.User;
 import tn.mdweb.dsi.tfar.exception.ValidationException;
@@ -30,6 +31,10 @@ public class FicheService {
 		return ficheRepository.findAll();	
 	}
 	
+	public List<FicheListDto> listAllFicheListDto() {
+		return ficheRepository.findAllFicheListDto();	
+	}
+	
 	public Fiche save(FicheDto ficheDto) throws ValidationException{
 		
 		Long codeUser = ficheDto.getCodeUser();
@@ -43,11 +48,11 @@ public class FicheService {
 		return fiche;
 	}
 	
-	public Fiche get(String id) {
+	public Fiche get(Long id) {
 		return ficheRepository.findById(id).get();
 	}
 	
-	public void delete(String id) {
+	public void delete(Long id) {
 		ficheRepository.deleteById(id);
 	}
 

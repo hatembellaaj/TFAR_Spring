@@ -79,8 +79,8 @@ public class UserController {
 		existinguser.setLogin(userDto.getLogin());
 		existinguser.setPassword(userDto.getPassword());
 		existinguser.setUrl(userDto.getUrl());
-		existinguser.setOrganisme(new Organisme(userDto.getCodeOrganisme()));
-		existinguser.setDepartement(new Departement(userDto.getCodeDepartement()));
+		existinguser.setOrganisme(new Organisme(userDto.getCodeOrganisme(),userDto.getNomOrganisme()));
+		existinguser.setDepartement(new Departement(userDto.getCodeDepartement(),userDto.getNomDepartement()));
 		UserDto x=userConverter.entityToDto(existinguser);
 		return userConverter.entityToDto(userService.save(x));
 	}

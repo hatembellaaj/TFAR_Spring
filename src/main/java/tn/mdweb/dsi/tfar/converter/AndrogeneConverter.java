@@ -16,7 +16,7 @@ public class AndrogeneConverter {
 	public AndrogeneDto entityToDto(Androgene androgene) {
 
 		AndrogeneDto map = new AndrogeneDto(androgene.getId(),androgene.getMois().name(),androgene.getReponse().name(),
-				androgene.getFiche().getNDossierFiche());
+				androgene.getFiche().getIdFiche());
 		return map;
 	}
 
@@ -27,7 +27,7 @@ public class AndrogeneConverter {
 
 	public Androgene dtoToEntity(AndrogeneDto androgeneDto) {
 		Androgene map = new Androgene(androgeneDto.getId(),Mois.valueOf(androgeneDto.getMois())
-				,Reponse.valueOf(androgeneDto.getReponse()), new Fiche(androgeneDto.getNDossierFiche()));
+				,Reponse.valueOf(androgeneDto.getReponse()), new Fiche(androgeneDto.getIdFiche()));
 
 		return map;
 	}

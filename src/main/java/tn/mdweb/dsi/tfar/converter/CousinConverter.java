@@ -18,7 +18,7 @@ public class CousinConverter {
 	public CousinDto entityToDto(Cousin cousin) {
 
 		CousinDto map = new CousinDto(cousin.getCousinId(),cousin.getNom(),cousin.getPrenom(),
-				cousin.getPlaceCousin().name(),cousin.getSexe().name(),cousin.getFiche().getNDossierFiche());
+				cousin.getPlaceCousin().name(),cousin.getSexe().name(),cousin.getFiche().getIdFiche());
 		return map;
 	}
 
@@ -31,7 +31,7 @@ public class CousinConverter {
 	public Cousin dtoToEntity(CousinDto cousinDto) {
 
 		Cousin map = new Cousin(cousinDto.getCousinId(),cousinDto.getNom(),cousinDto.getPrenom(),
-				PlaceCousin.valueOf(cousinDto.getPlaceCousin()),Sexe.valueOf(cousinDto.getSexe()),new Fiche(cousinDto.getNDFiche()));
+				PlaceCousin.valueOf(cousinDto.getPlaceCousin()),Sexe.valueOf(cousinDto.getSexe()),new Fiche(cousinDto.getIdFiche()));
 
 		return map;
 	}

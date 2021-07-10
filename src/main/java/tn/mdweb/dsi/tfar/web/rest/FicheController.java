@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.mdweb.dsi.tfar.converter.FicheConverter;
 import tn.mdweb.dsi.tfar.domain.dto.FicheDto;
+import tn.mdweb.dsi.tfar.domain.dto.FicheListDto;
 import tn.mdweb.dsi.tfar.domain.entity.Fiche;
 import tn.mdweb.dsi.tfar.service.FicheService;
 
@@ -33,10 +34,16 @@ public class FicheController {
 		List<Fiche> findAll = ficheService.listAll();
 		return ficheConverter.toDto(findAll);
 	}
+	
+	@GetMapping("/findAllFicheListDto")
+	public List<FicheListDto> getAllFichesListDto() {
+		List<FicheListDto> findAllListDto = ficheService.listAllFicheListDto();
+		return findAllListDto;
+	}
 
 	// get fiche by nDossierFiche
-		@GetMapping("/find/{nDossierFiche}")
-		public FicheDto getFicheDtoById(@PathVariable(value = "nDossierFiche") String id) {
+		@GetMapping("/find/{idFiche}")
+		public FicheDto getFicheDtoById(@PathVariable(value = "idFiche") Long id) {
 			Fiche fiche = ficheService.get(id);
 			return ficheConverter.toDto(fiche);
 		}
@@ -50,17 +57,17 @@ public class FicheController {
 
 		
 		// update ficheDto
-		@PutMapping("/save/{nDossierFiche}")
-		public FicheDto updateFiche(@RequestBody FicheDto ficheDto, @PathVariable("nDossierFiche") String id) throws Exception{
+		@PutMapping("/save/{idFiche}")
+		public FicheDto updateFiche(@RequestBody FicheDto ficheDto, @PathVariable("idFiche") Long id) throws Exception{
 			FicheDto ficheupdate = ficheDto;
-			ficheupdate.setNDossierFiche(id);
+			ficheupdate.setIdFiche(id);
 			return ficheConverter.toDto(ficheService.save(ficheupdate));
 		}
 		
 		
 		// delete fiche by nDossierFiche
-			@DeleteMapping("delete/{nDossierFiche}")
-			public String deleteFiche(@PathVariable("nDossierFiche") String id) {
+			@DeleteMapping("delete/{idFiche}")
+			public String deleteFiche(@PathVariable("idFiche") Long id) {
 				Fiche existingfiche = ficheService.get(id);
 				ficheService.delete(id);
 				return existingfiche.toString() + " is deleted";

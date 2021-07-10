@@ -22,6 +22,7 @@ import tn.mdweb.dsi.tfar.enumeration.Mois;
 import tn.mdweb.dsi.tfar.enumeration.Reponse;
 
 
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -47,7 +48,7 @@ public class Androgene {
 	private Reponse reponse;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "n_dossier_fiche", referencedColumnName = "n_dossier_fiche")
+	@JoinColumn(name = "id_fiche", referencedColumnName = "id_fiche")
 	private Fiche fiche;
 
 }

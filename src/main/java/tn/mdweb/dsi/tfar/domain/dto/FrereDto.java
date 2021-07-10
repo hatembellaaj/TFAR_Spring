@@ -27,6 +27,6 @@ public class FrereDto {
 
 	private Long age;
 	
-	private String nDFiche;
+	private Long idFiche;
 
 }

@@ -38,6 +38,6 @@ public class CytogenetiqueDto {
 	
 	private Long idLaboratoire;
 	
-	private String nDFiche;
+	private Long idFiche;
 
 }

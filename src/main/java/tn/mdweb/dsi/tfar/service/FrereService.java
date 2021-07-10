@@ -30,9 +30,9 @@ public class FrereService {
 
 public Frere save(FrereDto frereDto) throws ValidationException {
 		
-		String nDFiche = frereDto.getNDFiche();
+		Long idFiche = frereDto.getIdFiche();
 		List<Fiche> fiches =ficheRepository.findAll();
-		Fiche x = fiches.stream().filter(h -> h.getNDossierFiche().equals(nDFiche)).findAny().orElse(null);
+		Fiche x = fiches.stream().filter(h -> h.getIdFiche().equals(idFiche)).findAny().orElse(null);
 		if (x == null) {
 			throw new ValidationException("The fiche is not found.");
 		}

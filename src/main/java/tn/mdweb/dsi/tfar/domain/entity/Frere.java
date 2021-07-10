@@ -17,9 +17,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import tn.mdweb.dsi.tfar.enumeration.Atteint;
+import tn.mdweb.dsi.tfar.enumeration.Decedes;
 import tn.mdweb.dsi.tfar.enumeration.PlaceFraterie;
 import tn.mdweb.dsi.tfar.enumeration.Sexe;
-import tn.mdweb.dsi.tfar.enumeration.Decedes;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -62,7 +63,7 @@ public class Frere {
 	private Long age;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "n_dossier_fiche", referencedColumnName = "n_dossier_fiche")
+	@JoinColumn(name = "id_fiche", referencedColumnName = "id_fiche")
 	private Fiche fiche;
 
 }

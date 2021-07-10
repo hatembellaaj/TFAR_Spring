@@ -33,9 +33,9 @@ public class AndrogeneService {
 	
 	public Androgene save(AndrogeneDto androgeneDto) throws ValidationException{
 		
-		String nDFiche = androgeneDto.getNDossierFiche();
+		Long idFiche = androgeneDto.getIdFiche();
 		List<Fiche> fiches =ficheRepository.findAll();
-		Fiche x = fiches.stream().filter(h -> h.getNDossierFiche().equals(nDFiche)).findAny().orElse(null);
+		Fiche x = fiches.stream().filter(h -> h.getIdFiche().equals(idFiche)).findAny().orElse(null);
 		if (x == null) {
 			throw new ValidationException("The fiche is not found.");
 		}

@@ -39,8 +39,8 @@ public class PatientController {
 	}
 
 	// get patientDto by nDPatient
-		@GetMapping("/find/{nDPatient}")
-		public PatientDto getUserById(@PathVariable(value = "nDPatient") String id) {
+		@GetMapping("/find/{idPatient}")
+		public PatientDto getUserById(@PathVariable(value = "idPatient") Long id) {
 			Patient patient = patientService.get(id);
 			return patientConverter.entityToDto(patient);
 		}
@@ -52,18 +52,18 @@ public class PatientController {
 		}
 
 		// update user
-		@PutMapping("/save/{nDPatient}")
+		@PutMapping("/save/{idPatient}")
 		public PatientDto updateUser(@RequestBody PatientDto patientDto,
-				@PathVariable("nDPatient") String id) throws Exception {
+				@PathVariable("idPatient") Long id) throws Exception {
 			Patient existingpatient = patientService.get(id);
 			existingpatient.setNom(patientDto.getNom());
 			existingpatient.setPrenom(patientDto.getPrenom());
-			existingpatient.setSexe(Sexe.valueOf(patientDto.getSexe()));
+			existingpatient.setSexe(patientDto.getSexe());
 			existingpatient.setDateNaissance(patientDto.getDateNaissance());
 			existingpatient.setLieuNaissance(patientDto.getLieuNaissance());
 			existingpatient.setAdresse(patientDto.getAdresse());
 			existingpatient.setReperes(patientDto.getReperes());
-			existingpatient.setGouvernorat(Gouvernorat.valueOf(patientDto.getGouvernorat()));
+			existingpatient.setGouvernorat(patientDto.getGouvernorat());
 			existingpatient.setTel(patientDto.getTel());
 			existingpatient.setPrenomPere(patientDto.getPrenomPere());
 			existingpatient.setNomMere(patientDto.getNomMere());
@@ -71,15 +71,15 @@ public class PatientController {
 			existingpatient.setNomGmp(patientDto.getNomGmp());
 			existingpatient.setNomGmm(patientDto.getNomGmm());
 			existingpatient.setAge(patientDto.getAge());
-			existingpatient.setFiche(new Fiche(patientDto.getNDFiche()));
+			existingpatient.setFiche(new Fiche(patientDto.getIdFiche()));
 			
 			PatientDto x=patientConverter.entityToDto(existingpatient);
 			return patientConverter.entityToDto(patientService.save(x));
 		}
 
 		// delete Patient by nDPatient
-		@DeleteMapping("delete/{nDPatient}")
-		public String deleteUser(@PathVariable("nDPatient") String id) {
+		@DeleteMapping("delete/{idPatient}")
+		public String deleteUser(@PathVariable("idPatient") Long id) {
 			Patient existingpatient = patientService.get(id);
 			patientService.delete(id);
 			return existingpatient.toString() +  " is deleted";

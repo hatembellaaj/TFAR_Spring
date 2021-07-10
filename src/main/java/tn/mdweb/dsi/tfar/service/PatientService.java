@@ -28,9 +28,9 @@ public class PatientService {
 	}
 
 	public Patient save(PatientDto patientDto) throws ValidationException {
-		String nDFiche = patientDto.getNDFiche();
+		Long idFiche = patientDto.getIdFiche();
 		List<Fiche> fiches = ficheRepository.findAll();
-		Fiche x = fiches.stream().filter(h -> h.getNDossierFiche().equals(nDFiche)).findAny().orElse(null);
+		Fiche x = fiches.stream().filter(h -> h.getIdFiche().equals(idFiche)).findAny().orElse(null);
 		if (x == null) {
 			throw new ValidationException("The fiche is not found.");
 		}
@@ -39,11 +39,11 @@ public class PatientService {
 		return patient;
 	}
 
-	public Patient get(String id) {
+	public Patient get(Long id) {
 		return patientRepository.findById(id).get();
 	}
 
-	public void delete(String id) {
+	public void delete(Long id) {
 		patientRepository.deleteById(id);
 	}
 

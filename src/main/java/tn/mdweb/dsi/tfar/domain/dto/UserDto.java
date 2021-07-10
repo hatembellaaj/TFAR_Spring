@@ -13,16 +13,15 @@ import tn.mdweb.dsi.tfar.enumeration.TypeUser;
 @Getter
 @Setter
 public class UserDto {
-	
-	
+
 	private Long code;
 
-	//private String role;
-	
+	// private String role;
+
 	private RoleType role;
 
-	//private String type;
-	
+	// private String type;
+
 	private TypeUser type;
 
 	private String nom;
@@ -31,8 +30,8 @@ public class UserDto {
 
 	private String grade;
 
-	//private String gouvernorat;
-	
+	// private String gouvernorat;
+
 	private Gouvernorat gouvernorat;
 
 	private String adresse;
@@ -52,9 +51,13 @@ public class UserDto {
 	private String password;
 
 	private String url;
-	
+
 	private Long codeOrganisme;
 	
+	private String nomOrganisme;
+
 	private Long codeDepartement;
+
+	private String nomDepartement;
 
 }

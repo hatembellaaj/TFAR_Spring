@@ -18,7 +18,7 @@ public class FrereConverter {
 	public FrereDto entityToDto(Frere frere) {
 
 		FrereDto map = new FrereDto(frere.getFrereId(),frere.getNom(),frere.getPrenom(),frere.getAtteint().name(),frere.getPlaceFratrie().name(),
-				frere.getSexe().name(),frere.getDecedes().name(),frere.getAge(),frere.getFiche().getNDossierFiche());
+				frere.getSexe().name(),frere.getDecedes().name(),frere.getAge(),frere.getFiche().getIdFiche());
 		return map;
 	}
 
@@ -30,7 +30,7 @@ public class FrereConverter {
 	public Frere dtoToEntity(FrereDto frereDto) {
 		Frere map = new Frere(frereDto.getFrereId(),frereDto.getNom(),frereDto.getPrenom(),Atteint.valueOf(frereDto.getAtteint())
 				,PlaceFraterie.valueOf(frereDto.getPlaceFratrie()),Sexe.valueOf(frereDto.getSexe()),Decedes.valueOf(frereDto.getDecedes()),
-				frereDto.getAge(),new Fiche(frereDto.getNDFiche()));
+				frereDto.getAge(),new Fiche(frereDto.getIdFiche()));
 
 		return map;
 	}

@@ -23,7 +23,7 @@ public class CytogenetiqueConverter {
 		CytogenetiqueDto map = new CytogenetiqueDto(cytogenetique.getNEtudeCyto(),cytogenetique.getLymphocytes().name(),
 				cytogenetique.getDateSang(),cytogenetique.getAgentPortant().name(),cytogenetique.getInstabilite().name(),cytogenetique.getInstabilitePourcentage(),
 				cytogenetique.getIr().name(),cytogenetique.getIrPourcentage(),cytogenetique.getMoelle(),cytogenetique.getDateMoelle(),cytogenetique.getResultatMoelle(),
-				cytogenetique.getLaboratoire().getId(),cytogenetique.getFiche().getNDossierFiche());
+				cytogenetique.getLaboratoire().getId(),cytogenetique.getFiche().getIdFiche());
 
 		return map;
 	}
@@ -41,7 +41,7 @@ public class CytogenetiqueConverter {
 		Cytogenetique map = new Cytogenetique(cytogenetiqueDto.getNEtudeCyto(),Lymphocytes.valueOf(cytogenetiqueDto.getLymphocytes()),
 				cytogenetiqueDto.getDateSang(),AgentPortant.valueOf(cytogenetiqueDto.getAgentPortant()),Instabilite.valueOf(cytogenetiqueDto.getInstabilite()),cytogenetiqueDto.getInstabilitePourcentage(),
 				IR.valueOf(cytogenetiqueDto.getIr()),cytogenetiqueDto.getIrPourcentage(),cytogenetiqueDto.getMoelle(),cytogenetiqueDto.getDateMoelle(),cytogenetiqueDto.getResultatMoelle(),
-				new Laboratoire(cytogenetiqueDto.getIdLaboratoire()), new Fiche(cytogenetiqueDto.getNDFiche()));
+				new Laboratoire(cytogenetiqueDto.getIdLaboratoire()), new Fiche(cytogenetiqueDto.getIdFiche()));
 
 		return map;
 	}

@@ -16,11 +16,11 @@ public class PatientConverter {
 	
 	public PatientDto entityToDto(Patient patient) {
 
-		PatientDto map = new PatientDto(patient.getNDPatient(),patient.getNom(),patient.getPrenom(),
-				patient.getSexe().name(),patient.getDateNaissance(),patient.getLieuNaissance(),
-				patient.getAdresse(),patient.getReperes(),patient.getGouvernorat().name(),patient.getTel(),
+		PatientDto map = new PatientDto(patient.getIdPatient(),patient.getNDPatient(),patient.getNom(),patient.getPrenom(),
+				patient.getSexe(),patient.getDateNaissance(),patient.getLieuNaissance(),
+				patient.getAdresse(),patient.getReperes(),patient.getGouvernorat(),patient.getTel(),
 				patient.getPrenomPere(),patient.getNomMere(),patient.getPrenomMere(),
-				patient.getNomGmp(),patient.getNomGmm(),patient.getAge(),patient.getFiche().getNDossierFiche());
+				patient.getNomGmp(),patient.getNomGmm(),patient.getAge(),patient.getFiche().getIdFiche());
 		return map;
 	}
 
@@ -32,11 +32,11 @@ public class PatientConverter {
 
 	public Patient dtoToEntity(PatientDto patientDto) {
 
-		Patient map = new Patient(patientDto.getNDPatient(),patientDto.getNom(),patientDto.getPrenom(),
-				Sexe.valueOf(patientDto.getSexe()),patientDto.getDateNaissance(),patientDto.getLieuNaissance(),
-				patientDto.getAdresse(),patientDto.getReperes(),Gouvernorat.valueOf(patientDto.getGouvernorat()),patientDto.getTel(),
+		Patient map = new Patient(patientDto.getIdPatient(),patientDto.getNDPatient(),patientDto.getNom(),patientDto.getPrenom(),
+				patientDto.getSexe(),patientDto.getDateNaissance(),patientDto.getLieuNaissance(),
+				patientDto.getAdresse(),patientDto.getReperes(),patientDto.getGouvernorat(),patientDto.getTel(),
 				patientDto.getPrenomPere(),patientDto.getNomMere(),patientDto.getPrenomMere(),
-				patientDto.getNomGmp(),patientDto.getNomGmm(),patientDto.getAge(),new Fiche(patientDto.getNDFiche()));
+				patientDto.getNomGmp(),patientDto.getNomGmm(),patientDto.getAge(),new Fiche(patientDto.getIdFiche()));
 
 		return map;
 	}

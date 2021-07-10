@@ -78,7 +78,7 @@ public class Cytogenetique {
 	private Laboratoire laboratoire;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "n_dossier_fiche", referencedColumnName = "n_dossier_fiche")
+	@JoinColumn(name = "id_fiche", referencedColumnName = "id_fiche")
 	private Fiche fiche;
 
 }

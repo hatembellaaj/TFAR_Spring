@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import tn.mdweb.dsi.tfar.domain.entity.Patient;
 
 @Repository
-public interface PatientRepository extends JpaRepository<Patient, String> {
+public interface PatientRepository extends JpaRepository<Patient, Long> {
 
 }

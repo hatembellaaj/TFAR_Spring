@@ -59,7 +59,7 @@ public class AndrogeneController {
 		Androgene existingandrogene = androgeneService.get(id);
 		existingandrogene.setMois(Mois.valueOf(androgeneDto.getMois()));
 		existingandrogene.setReponse(Reponse.valueOf(androgeneDto.getReponse()));
-		existingandrogene.setFiche(new Fiche(androgeneDto.getNDossierFiche()));
+		existingandrogene.setFiche(new Fiche(androgeneDto.getIdFiche()));
 		AndrogeneDto a=androgeneConverter.entityToDto(existingandrogene);
 		return androgeneConverter.entityToDto(androgeneService.save(a));
 	}

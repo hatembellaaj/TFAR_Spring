@@ -22,6 +22,6 @@ public class CousinDto {
 
 	private String sexe;
 	
-	private String nDFiche;
+	private Long idFiche;
 
 }

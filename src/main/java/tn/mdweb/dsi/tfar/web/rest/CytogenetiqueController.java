@@ -69,7 +69,7 @@ public class CytogenetiqueController {
 		existingcytogenetique.setDateMoelle(cytogenetiqueDto.getDateMoelle());
 		existingcytogenetique.setResultatMoelle(cytogenetiqueDto.getResultatMoelle());
 		existingcytogenetique.setLaboratoire(new Laboratoire(cytogenetiqueDto.getIdLaboratoire()));
-		existingcytogenetique.setFiche(new Fiche(cytogenetiqueDto.getNDFiche()));
+		existingcytogenetique.setFiche(new Fiche(cytogenetiqueDto.getIdFiche()));
 		return cytogenetiqueConverter.entityToDto(cytogenetiqueService.save(cytogenetiqueConverter.entityToDto(existingcytogenetique)));
 	}
 

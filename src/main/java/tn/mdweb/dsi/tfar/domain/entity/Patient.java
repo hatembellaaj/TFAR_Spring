@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -29,6 +31,10 @@ public class Patient {
 
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_patient")
+	private Long idPatient;
+	
 	@Column(name = "n_dossier_patient", length = 10)
 	private String nDPatient;
 	
@@ -81,7 +87,7 @@ public class Patient {
 	private int age;
 	
 	@OneToOne(optional = false)
-	@JoinColumn(name = "id_fiche", referencedColumnName = "n_dossier_fiche" ) 
+	@JoinColumn(name = "id_fiche", referencedColumnName = "id_fiche" ) 
 	private Fiche fiche;
 	
 }

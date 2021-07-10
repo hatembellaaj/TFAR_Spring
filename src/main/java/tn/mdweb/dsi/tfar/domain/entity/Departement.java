@@ -34,12 +34,5 @@ public class Departement {
 	@Column(name="nom")
 	private String nom;
 
-	public Departement(Long code) {
-		this.code = code;
-	}
-
-
-	
-
 	
 }

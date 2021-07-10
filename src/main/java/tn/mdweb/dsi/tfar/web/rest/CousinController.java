@@ -58,7 +58,7 @@ public class CousinController {
 			existingcousin.setPrenom(cousinDto.getPrenom());
 			existingcousin.setPlaceCousin(PlaceCousin.valueOf(cousinDto.getPlaceCousin()));
 			existingcousin.setSexe(Sexe.valueOf(cousinDto.getSexe()));
-			existingcousin.setFiche(new Fiche(cousinDto.getNDFiche()));
+			existingcousin.setFiche(new Fiche(cousinDto.getIdFiche()));
 	
 			CousinDto a=cousinConverter.entityToDto(existingcousin);
 			return cousinConverter.entityToDto(cousinService.save(a));

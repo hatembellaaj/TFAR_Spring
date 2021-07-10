@@ -45,9 +45,9 @@ public class CytogenetiqueService {
 			throw new ValidationException("The laboratoire is not found.");
 		}
 
-		String nDFiche = cytogenetiqueDto.getNDFiche();
+		Long idFiche = cytogenetiqueDto.getIdFiche();
 		List<Fiche> fiches = ficheRepository.findAll();
-		Fiche y = fiches.stream().filter(h -> h.getNDossierFiche().equals(nDFiche)).findAny().orElse(null);
+		Fiche y = fiches.stream().filter(h -> h.getIdFiche().equals(idFiche)).findAny().orElse(null);
 		if (y == null) {
 			throw new ValidationException("The fiche is not found.");
 		}

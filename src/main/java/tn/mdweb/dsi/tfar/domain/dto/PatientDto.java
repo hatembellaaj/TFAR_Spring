@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tn.mdweb.dsi.tfar.enumeration.Gouvernorat;
+import tn.mdweb.dsi.tfar.enumeration.Sexe;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,13 +13,15 @@ import lombok.Setter;
 @Setter
 public class PatientDto {
 	
+	private Long idPatient;
+	
 	private String nDPatient;
 
 	private String nom;
 
 	private String prenom;
 
-	private String sexe;
+	private Sexe sexe;
 
 	private String dateNaissance;
 
@@ -27,7 +31,7 @@ public class PatientDto {
 
 	private String reperes;
 
-	private String gouvernorat;
+	private Gouvernorat gouvernorat;
 
 	private String tel;
 
@@ -43,6 +47,6 @@ public class PatientDto {
 
 	private int age;
 	
-	private String nDFiche;
+	private Long idFiche;
 
 }
