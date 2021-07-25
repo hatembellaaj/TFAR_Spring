@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tn.mdweb.dsi.tfar.enumeration.PlaceCousin;
+import tn.mdweb.dsi.tfar.enumeration.Sexe;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,9 +20,9 @@ public class CousinDto {
 
 	private String prenom;
 
-	private String placeCousin;
+	private PlaceCousin placeCousin;
 
-	private String sexe;
+	private Sexe sexe;
 	
 	private Long idFiche;
 

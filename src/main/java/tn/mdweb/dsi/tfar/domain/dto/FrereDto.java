@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tn.mdweb.dsi.tfar.enumeration.Atteint;
+import tn.mdweb.dsi.tfar.enumeration.Decedes;
+import tn.mdweb.dsi.tfar.enumeration.PlaceFraterie;
+import tn.mdweb.dsi.tfar.enumeration.Sexe;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,13 +21,13 @@ public class FrereDto {
 
 	private String prenom;
 
-	private String atteint;
+	private Atteint atteint;
 
-	private String placeFratrie;
+	private PlaceFraterie placeFratrie;
 
-	private String sexe;
+	private Sexe sexe;
 
-	private String decedes;
+	private Decedes decedes;
 
 	private Long age;
 	

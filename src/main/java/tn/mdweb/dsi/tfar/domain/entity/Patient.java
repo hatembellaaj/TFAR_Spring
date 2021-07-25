@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -36,13 +38,16 @@ public class Patient {
 	private Long idPatient;
 	
 	@Column(name = "n_dossier_patient", length = 10)
+	@NotEmpty
 	private String nDPatient;
 	
 
 	@Column(name = "nom", length = 50)
+	@NotEmpty
 	private String nom;
 
 	@Column(name = "prenom", length = 50)
+	@NotEmpty
 	private String prenom;
 
 	@Column(name = "sexe", length = 4)

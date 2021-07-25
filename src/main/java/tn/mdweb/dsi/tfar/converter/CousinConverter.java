@@ -2,23 +2,18 @@ package tn.mdweb.dsi.tfar.converter;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Component;
-
 import tn.mdweb.dsi.tfar.domain.dto.CousinDto;
 import tn.mdweb.dsi.tfar.domain.entity.Cousin;
 import tn.mdweb.dsi.tfar.domain.entity.Fiche;
-import tn.mdweb.dsi.tfar.enumeration.PlaceCousin;
-import tn.mdweb.dsi.tfar.enumeration.Sexe;
 
 @Component
 public class CousinConverter {
-	
-	
+
 	public CousinDto entityToDto(Cousin cousin) {
 
-		CousinDto map = new CousinDto(cousin.getCousinId(),cousin.getNom(),cousin.getPrenom(),
-				cousin.getPlaceCousin().name(),cousin.getSexe().name(),cousin.getFiche().getIdFiche());
+		CousinDto map = new CousinDto(cousin.getCousinId(), cousin.getNom(), cousin.getPrenom(),
+				cousin.getPlaceCousin(), cousin.getSexe(), cousin.getFiche().getIdFiche());
 		return map;
 	}
 
@@ -30,8 +25,8 @@ public class CousinConverter {
 
 	public Cousin dtoToEntity(CousinDto cousinDto) {
 
-		Cousin map = new Cousin(cousinDto.getCousinId(),cousinDto.getNom(),cousinDto.getPrenom(),
-				PlaceCousin.valueOf(cousinDto.getPlaceCousin()),Sexe.valueOf(cousinDto.getSexe()),new Fiche(cousinDto.getIdFiche()));
+		Cousin map = new Cousin(cousinDto.getCousinId(), cousinDto.getNom(), cousinDto.getPrenom(),
+				cousinDto.getPlaceCousin(), cousinDto.getSexe(), new Fiche(cousinDto.getIdFiche()));
 
 		return map;
 	}
@@ -40,7 +35,5 @@ public class CousinConverter {
 
 		return cousinDto.stream().map(x -> dtoToEntity(x)).collect(Collectors.toList());
 	}
-	
-	
 
 }

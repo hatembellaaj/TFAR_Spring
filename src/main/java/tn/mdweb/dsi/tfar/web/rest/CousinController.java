@@ -15,8 +15,6 @@ import tn.mdweb.dsi.tfar.converter.CousinConverter;
 import tn.mdweb.dsi.tfar.domain.dto.CousinDto;
 import tn.mdweb.dsi.tfar.domain.entity.Cousin;
 import tn.mdweb.dsi.tfar.domain.entity.Fiche;
-import tn.mdweb.dsi.tfar.enumeration.PlaceCousin;
-import tn.mdweb.dsi.tfar.enumeration.Sexe;
 import tn.mdweb.dsi.tfar.service.CousinService;
 
 @RestController
@@ -56,8 +54,8 @@ public class CousinController {
 			
 			existingcousin.setNom(cousinDto.getNom());
 			existingcousin.setPrenom(cousinDto.getPrenom());
-			existingcousin.setPlaceCousin(PlaceCousin.valueOf(cousinDto.getPlaceCousin()));
-			existingcousin.setSexe(Sexe.valueOf(cousinDto.getSexe()));
+			existingcousin.setPlaceCousin(cousinDto.getPlaceCousin());
+			existingcousin.setSexe(cousinDto.getSexe());
 			existingcousin.setFiche(new Fiche(cousinDto.getIdFiche()));
 	
 			CousinDto a=cousinConverter.entityToDto(existingcousin);

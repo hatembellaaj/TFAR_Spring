@@ -11,13 +11,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import tn.mdweb.dsi.tfar.converter.AndrogeneConverter;
 import tn.mdweb.dsi.tfar.domain.dto.AndrogeneDto;
 import tn.mdweb.dsi.tfar.domain.entity.Androgene;
 import tn.mdweb.dsi.tfar.domain.entity.Fiche;
-import tn.mdweb.dsi.tfar.enumeration.Mois;
-import tn.mdweb.dsi.tfar.enumeration.Reponse;
 import tn.mdweb.dsi.tfar.service.AndrogeneService;
 
 @RestController
@@ -57,8 +54,8 @@ public class AndrogeneController {
 	@PutMapping("/save/{id}")
 	public AndrogeneDto updateAndrogeneDto(@RequestBody AndrogeneDto androgeneDto, @PathVariable("id") long id)  throws Exception {
 		Androgene existingandrogene = androgeneService.get(id);
-		existingandrogene.setMois(Mois.valueOf(androgeneDto.getMois()));
-		existingandrogene.setReponse(Reponse.valueOf(androgeneDto.getReponse()));
+		existingandrogene.setMois(androgeneDto.getMois());
+		existingandrogene.setReponse(androgeneDto.getReponse());
 		existingandrogene.setFiche(new Fiche(androgeneDto.getIdFiche()));
 		AndrogeneDto a=androgeneConverter.entityToDto(existingandrogene);
 		return androgeneConverter.entityToDto(androgeneService.save(a));

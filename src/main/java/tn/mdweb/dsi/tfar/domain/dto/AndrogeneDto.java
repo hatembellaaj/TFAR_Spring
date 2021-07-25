@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tn.mdweb.dsi.tfar.enumeration.Mois;
+import tn.mdweb.dsi.tfar.enumeration.Reponse;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,9 +15,9 @@ public class AndrogeneDto {
 	
 	private Long id;
 
-	private String mois;
+	private Mois mois;
 
-	private String reponse;
+	private Reponse reponse;
 	
 	private Long idFiche;
 

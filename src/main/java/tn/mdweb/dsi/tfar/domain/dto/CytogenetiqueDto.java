@@ -6,6 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tn.mdweb.dsi.tfar.enumeration.AgentPortant;
+import tn.mdweb.dsi.tfar.enumeration.IR;
+import tn.mdweb.dsi.tfar.enumeration.Instabilite;
+import tn.mdweb.dsi.tfar.enumeration.Lymphocytes;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,17 +20,17 @@ public class CytogenetiqueDto {
 	
 	private Long nEtudeCyto;
 
-	private String lymphocytes;
+	private Lymphocytes lymphocytes;
 
 	private Date dateSang;
 
-	private String agentPortant;
+	private AgentPortant agentPortant;
 
-	private String instabilite;
+	private Instabilite instabilite;
 
 	private Double instabilitePourcentage;
 
-	private String ir;
+	private IR ir;
 
 	private Double irPourcentage;
 

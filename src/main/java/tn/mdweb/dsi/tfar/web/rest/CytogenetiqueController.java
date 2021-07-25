@@ -11,16 +11,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import tn.mdweb.dsi.tfar.converter.CytogenetiqueConverter;
 import tn.mdweb.dsi.tfar.domain.dto.CytogenetiqueDto;
 import tn.mdweb.dsi.tfar.domain.entity.Cytogenetique;
 import tn.mdweb.dsi.tfar.domain.entity.Fiche;
 import tn.mdweb.dsi.tfar.domain.entity.Laboratoire;
-import tn.mdweb.dsi.tfar.enumeration.AgentPortant;
-import tn.mdweb.dsi.tfar.enumeration.IR;
-import tn.mdweb.dsi.tfar.enumeration.Instabilite;
-import tn.mdweb.dsi.tfar.enumeration.Lymphocytes;
 import tn.mdweb.dsi.tfar.service.CytogenetiqueService;
 
 @RestController
@@ -58,12 +53,12 @@ public class CytogenetiqueController {
 	public CytogenetiqueDto updateCytogenetiqueDto(@RequestBody CytogenetiqueDto cytogenetiqueDto,
 			@PathVariable("nEtudeCyto") Long id) throws Exception {
 		Cytogenetique existingcytogenetique = cytogenetiqueService.get(id);
-		existingcytogenetique.setLymphocytes(Lymphocytes.valueOf(cytogenetiqueDto.getLymphocytes()));
+		existingcytogenetique.setLymphocytes(cytogenetiqueDto.getLymphocytes());
 		existingcytogenetique.setDateSang(cytogenetiqueDto.getDateSang());
-		existingcytogenetique.setAgentPortant(AgentPortant.valueOf(cytogenetiqueDto.getAgentPortant()));
-		existingcytogenetique.setInstabilite(Instabilite.valueOf(cytogenetiqueDto.getInstabilite()));
+		existingcytogenetique.setAgentPortant(cytogenetiqueDto.getAgentPortant());
+		existingcytogenetique.setInstabilite(cytogenetiqueDto.getInstabilite());
 		existingcytogenetique.setInstabilitePourcentage(cytogenetiqueDto.getInstabilitePourcentage());
-		existingcytogenetique.setIr(IR.valueOf(cytogenetiqueDto.getIr()));
+		existingcytogenetique.setIr(cytogenetiqueDto.getIr());
 		existingcytogenetique.setIrPourcentage(cytogenetiqueDto.getIrPourcentage());
 		existingcytogenetique.setMoelle(cytogenetiqueDto.getMoelle());
 		existingcytogenetique.setDateMoelle(cytogenetiqueDto.getDateMoelle());

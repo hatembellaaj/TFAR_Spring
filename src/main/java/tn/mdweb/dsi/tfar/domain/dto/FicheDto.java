@@ -1,7 +1,9 @@
 package tn.mdweb.dsi.tfar.domain.dto;
 
 import java.util.Date;
-import javax.validation.constraints.NotNull;
+
+import javax.annotation.Nullable;
+import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,11 +33,12 @@ public class FicheDto {
 	
 	private Long idFiche;
 	
-	@NotNull
+	@NotEmpty(message = "the nDossierFiche musn't be empty")
 	private String nDossierFiche;
 
 	private Date dateDiagnostique;
 
+	//@PastOrPresent
 	private Date dateEnregistrement;
 
 	private String degConsang;

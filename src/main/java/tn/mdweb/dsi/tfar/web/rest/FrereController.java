@@ -15,10 +15,6 @@ import tn.mdweb.dsi.tfar.converter.FrereConverter;
 import tn.mdweb.dsi.tfar.domain.dto.FrereDto;
 import tn.mdweb.dsi.tfar.domain.entity.Fiche;
 import tn.mdweb.dsi.tfar.domain.entity.Frere;
-import tn.mdweb.dsi.tfar.enumeration.Atteint;
-import tn.mdweb.dsi.tfar.enumeration.Decedes;
-import tn.mdweb.dsi.tfar.enumeration.PlaceFraterie;
-import tn.mdweb.dsi.tfar.enumeration.Sexe;
 import tn.mdweb.dsi.tfar.service.FrereService;
 
 @RestController
@@ -58,10 +54,10 @@ public class FrereController {
 				Frere existingfrere = frereService.get(id);
 				existingfrere.setNom(frereDto.getNom());
 				existingfrere.setPrenom(frereDto.getPrenom());
-				existingfrere.setAtteint(Atteint.valueOf(frereDto.getAtteint()));
-				existingfrere.setPlaceFratrie(PlaceFraterie.valueOf(frereDto.getPlaceFratrie()));
-				existingfrere.setSexe(Sexe.valueOf(frereDto.getSexe()));
-				existingfrere.setDecedes(Decedes.valueOf(frereDto.getDecedes()));
+				existingfrere.setAtteint(frereDto.getAtteint());
+				existingfrere.setPlaceFratrie(frereDto.getPlaceFratrie());
+				existingfrere.setSexe(frereDto.getSexe());
+				existingfrere.setDecedes(frereDto.getDecedes());
 				existingfrere.setAge(frereDto.getAge());
 				existingfrere.setFiche(new Fiche(frereDto.getIdFiche()));
 				FrereDto f=frereConverter.entityToDto(existingfrere);

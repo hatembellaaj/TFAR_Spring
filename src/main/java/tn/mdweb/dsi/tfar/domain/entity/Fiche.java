@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PastOrPresent;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -51,12 +53,15 @@ public class Fiche {
 
 	
 	@Column(name = "n_dossier_fiche", length = 10)
+	@NotEmpty
 	private String nDossierFiche;
 
 	@Column(name = "date_diagnostique")
+	@PastOrPresent
 	private Date dateDiagnostique;
 
 	@Column(name = "date_enregistrement")
+	@PastOrPresent
 	private Date dateEnregistrement;
 
 	@Column(name = "deg_Consang", length = 50)
