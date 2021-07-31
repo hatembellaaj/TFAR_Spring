@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -31,23 +30,18 @@ import tn.mdweb.dsi.tfar.enumeration.Sexe;
 @Table(name = "patient")
 public class Patient {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_patient")
 	private Long idPatient;
-	
+
 	@Column(name = "n_dossier_patient", length = 10)
-	@NotEmpty
-	private String nDPatient;
-	
+	private String ndPatient;
 
 	@Column(name = "nom", length = 50)
-	@NotEmpty
 	private String nom;
 
 	@Column(name = "prenom", length = 50)
-	@NotEmpty
 	private String prenom;
 
 	@Column(name = "sexe", length = 4)
@@ -88,11 +82,35 @@ public class Patient {
 	@Column(name = "nom_gmm")
 	private String nomGmm;
 
-	@Column(name = "age")
-	private int age;
-	
+	/*
+	 * @Column(name = "age") private int age;
+	 */
+
 	@OneToOne(optional = false)
-	@JoinColumn(name = "id_fiche", referencedColumnName = "id_fiche" ) 
+	@JoinColumn(name = "id_fiche", referencedColumnName = "id_fiche")
 	private Fiche fiche;
+
+	public Patient(String ndPatient, String nom, String prenom, Sexe sexe, String dateNaissance, String lieuNaissance,
+			String adresse, String reperes, Gouvernorat gouvernorat, String tel, String prenomPere, String nomMere,
+			String prenomMere, String nomGmp, String nomGmm, Fiche fiche) {
+		this.ndPatient = ndPatient;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.sexe = sexe;
+		this.dateNaissance = dateNaissance;
+		this.lieuNaissance = lieuNaissance;
+		this.adresse = adresse;
+		this.reperes = reperes;
+		this.gouvernorat = gouvernorat;
+		this.tel = tel;
+		this.prenomPere = prenomPere;
+		this.nomMere = nomMere;
+		this.prenomMere = prenomMere;
+		this.nomGmp = nomGmp;
+		this.nomGmm = nomGmm;
+		this.fiche = fiche;
+	}
+
 	
+
 }

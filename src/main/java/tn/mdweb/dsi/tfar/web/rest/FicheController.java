@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.mdweb.dsi.tfar.converter.FicheConverter;
+import tn.mdweb.dsi.tfar.domain.dto.Fiche2Dto;
 import tn.mdweb.dsi.tfar.domain.dto.FicheDto;
 import tn.mdweb.dsi.tfar.domain.dto.FicheListDto;
 import tn.mdweb.dsi.tfar.domain.entity.Fiche;
@@ -50,7 +51,7 @@ public class FicheController {
 
 		// create ficheDto
 		@PostMapping("/save") 
-		public FicheDto save(@RequestBody FicheDto ficheDto)  throws Exception{
+		public FicheDto save(@RequestBody Fiche2Dto ficheDto)  throws Exception{
 			return ficheConverter.toDto(ficheService.save(ficheDto));
 		}
 		
@@ -58,8 +59,8 @@ public class FicheController {
 		
 		// update ficheDto
 		@PutMapping("/save/{idFiche}")
-		public FicheDto updateFiche(@RequestBody FicheDto ficheDto, @PathVariable("idFiche") Long id) throws Exception{
-			FicheDto ficheupdate = ficheDto;
+		public FicheDto updateFiche(@RequestBody Fiche2Dto ficheDto, @PathVariable("idFiche") Long id) throws Exception{
+			Fiche2Dto ficheupdate = ficheDto;
 			ficheupdate.setIdFiche(id);
 			return ficheConverter.toDto(ficheService.save(ficheupdate));
 		}

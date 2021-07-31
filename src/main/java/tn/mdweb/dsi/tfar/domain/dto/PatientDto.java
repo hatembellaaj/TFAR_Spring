@@ -18,7 +18,7 @@ public class PatientDto {
 	private Long idPatient;
 	
 	@NotEmpty
-	private String nDPatient;
+	private String ndPatient;
 
 	@NotEmpty
 	private String nom;
@@ -50,8 +50,12 @@ public class PatientDto {
 
 	private String nomGmm;
 
-	private int age;
+	//private int age;
 	
 	private Long idFiche;
+
+
+	
+	
 
 }

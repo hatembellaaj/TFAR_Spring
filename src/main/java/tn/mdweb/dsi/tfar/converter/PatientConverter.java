@@ -7,20 +7,17 @@ import org.springframework.stereotype.Component;
 import tn.mdweb.dsi.tfar.domain.dto.PatientDto;
 import tn.mdweb.dsi.tfar.domain.entity.Fiche;
 import tn.mdweb.dsi.tfar.domain.entity.Patient;
-import tn.mdweb.dsi.tfar.enumeration.Gouvernorat;
-import tn.mdweb.dsi.tfar.enumeration.Sexe;
-
 @Component
 public class PatientConverter {
 	
 	
 	public PatientDto entityToDto(Patient patient) {
 
-		PatientDto map = new PatientDto(patient.getIdPatient(),patient.getNDPatient(),patient.getNom(),patient.getPrenom(),
+		PatientDto map = new PatientDto(patient.getIdPatient(),patient.getNdPatient(),patient.getNom(),patient.getPrenom(),
 				patient.getSexe(),patient.getDateNaissance(),patient.getLieuNaissance(),
 				patient.getAdresse(),patient.getReperes(),patient.getGouvernorat(),patient.getTel(),
 				patient.getPrenomPere(),patient.getNomMere(),patient.getPrenomMere(),
-				patient.getNomGmp(),patient.getNomGmm(),patient.getAge(),patient.getFiche().getIdFiche());
+				patient.getNomGmp(),patient.getNomGmm(),patient.getFiche().getIdFiche());
 		return map;
 	}
 
@@ -32,11 +29,11 @@ public class PatientConverter {
 
 	public Patient dtoToEntity(PatientDto patientDto) {
 
-		Patient map = new Patient(patientDto.getIdPatient(),patientDto.getNDPatient(),patientDto.getNom(),patientDto.getPrenom(),
+		Patient map = new Patient(patientDto.getIdPatient(),patientDto.getNdPatient(),patientDto.getNom(),patientDto.getPrenom(),
 				patientDto.getSexe(),patientDto.getDateNaissance(),patientDto.getLieuNaissance(),
 				patientDto.getAdresse(),patientDto.getReperes(),patientDto.getGouvernorat(),patientDto.getTel(),
 				patientDto.getPrenomPere(),patientDto.getNomMere(),patientDto.getPrenomMere(),
-				patientDto.getNomGmp(),patientDto.getNomGmm(),patientDto.getAge(),new Fiche(patientDto.getIdFiche()));
+				patientDto.getNomGmp(),patientDto.getNomGmm(),new Fiche(patientDto.getIdFiche()));
 
 		return map;
 	}

@@ -1,6 +1,7 @@
 package tn.mdweb.dsi.tfar.domain.dto;
 
 import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,12 +22,11 @@ import tn.mdweb.dsi.tfar.enumeration.Statut;
 import tn.mdweb.dsi.tfar.enumeration.Toxicite;
 
 
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class FicheDto {
+public class Fiche2Dto {
 	
 	private Long idFiche;
 
@@ -413,6 +413,17 @@ public class FicheDto {
 	private Double survieGlobale;
 	
 	private Long codeUser;
+	
+	
+	private PatientDto patient;
+	
+	private AndrogeneDto androgene;
+	
+	private CousinDto cousin;
+	
+	private FrereDto frere;
+	
+	private CytogenetiqueDto cytogenetique;
 
 
 }

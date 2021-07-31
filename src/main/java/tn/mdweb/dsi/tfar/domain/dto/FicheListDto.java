@@ -14,7 +14,7 @@ public class FicheListDto {
 
 	private Long idFiche;
 
-	private String nDossierFiche;
+	private String ndossierFiche;
 	
 	private Date dateDiagnostique;
 

@@ -70,7 +70,6 @@ public class PatientController {
 			existingpatient.setPrenomMere(patientDto.getPrenomMere());
 			existingpatient.setNomGmp(patientDto.getNomGmp());
 			existingpatient.setNomGmm(patientDto.getNomGmm());
-			existingpatient.setAge(patientDto.getAge());
 			existingpatient.setFiche(new Fiche(patientDto.getIdFiche()));
 			
 			PatientDto x=patientConverter.entityToDto(existingpatient);
