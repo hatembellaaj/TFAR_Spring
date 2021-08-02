@@ -51,4 +51,12 @@ public class Androgene {
 	@JoinColumn(name = "id_fiche", referencedColumnName = "id_fiche")
 	private Fiche fiche;
 
+	public Androgene(@NotNull Mois mois, Reponse reponse, Fiche fiche) {
+		this.mois = mois;
+		this.reponse = reponse;
+		this.fiche = fiche;
+	}
+	
+	
+
 }

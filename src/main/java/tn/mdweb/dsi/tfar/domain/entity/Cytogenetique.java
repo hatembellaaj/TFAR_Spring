@@ -37,7 +37,7 @@ public class Cytogenetique {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "n_etude_cyto")
-	private Long nEtudeCyto;
+	private Long netudeCyto;
 
 	@Column(name = "lymphocytes", length = 10)
 	@Enumerated(EnumType.STRING)
@@ -80,5 +80,24 @@ public class Cytogenetique {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_fiche", referencedColumnName = "id_fiche")
 	private Fiche fiche;
+
+	public Cytogenetique(Lymphocytes lymphocytes, Date dateSang, AgentPortant agentPortant, Instabilite instabilite,
+			Double instabilitePourcentage, IR ir, Double irPourcentage, String moelle, Date dateMoelle,
+			String resultatMoelle, Laboratoire laboratoire, Fiche fiche) {
+		this.lymphocytes = lymphocytes;
+		this.dateSang = dateSang;
+		this.agentPortant = agentPortant;
+		this.instabilite = instabilite;
+		this.instabilitePourcentage = instabilitePourcentage;
+		this.ir = ir;
+		this.irPourcentage = irPourcentage;
+		this.moelle = moelle;
+		this.dateMoelle = dateMoelle;
+		this.resultatMoelle = resultatMoelle;
+		this.laboratoire = laboratoire;
+		this.fiche = fiche;
+	}
+	
+	
 
 }

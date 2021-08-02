@@ -188,7 +188,7 @@ public class Fiche2Dto {
 	
 	private Enum1 luxCongHanche;
 	
-	private Enum1 anomRachis;
+	private String anomRachis;
 
 	private String autreAnomOss;
 	

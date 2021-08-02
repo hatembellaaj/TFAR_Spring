@@ -18,7 +18,7 @@ import tn.mdweb.dsi.tfar.enumeration.Lymphocytes;
 public class CytogenetiqueDto {
 	
 	
-	private Long nEtudeCyto;
+	private Long netudeCyto;
 
 	private Lymphocytes lymphocytes;
 

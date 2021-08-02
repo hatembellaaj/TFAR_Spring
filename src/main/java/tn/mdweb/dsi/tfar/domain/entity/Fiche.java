@@ -348,9 +348,8 @@ public class Fiche {
 	@Enumerated(EnumType.STRING)
 	private Enum1 luxCongHanche;
 	
-	@Column(name = "anom_rachis", length = 7)
-	@Enumerated(EnumType.STRING)
-	private Enum1 anomRachis;
+	@Column(name = "anom_rachis", length = 50)
+	private String anomRachis;
 	
 	@Column(name = "autre_anom_oss", length = 50)
 	private String autreAnomOss;
