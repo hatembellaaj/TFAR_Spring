@@ -14,4 +14,7 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 	@Query("DELETE FROM tn.mdweb.dsi.tfar.domain.entity.Patient p WHERE p.fiche.idFiche= :idOfFiche ")
 	@Modifying
 	void DeletePatientByIdFiche(@Param("idOfFiche") Long idOfFiche);
+	
+	@Query("SELECT p FROM tn.mdweb.dsi.tfar.domain.entity.Patient p WHERE p.fiche.idFiche = :idOfFiche") 
+	Patient findPatientByIdFiche(@Param("idOfFiche") Long idOfFiche);
 }

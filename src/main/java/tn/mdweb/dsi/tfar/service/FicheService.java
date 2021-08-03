@@ -90,8 +90,12 @@ public class FicheService {
 				fiche2Dto.getPatient().getPrenomPere(), fiche2Dto.getPatient().getNomMere(),
 				fiche2Dto.getPatient().getPrenomMere(), fiche2Dto.getPatient().getNomGmp(),
 				fiche2Dto.getPatient().getNomGmm(), new Fiche(savedFiche.getIdFiche()));
+		
+		
 
 		Patient r = patientRepository.save(patient);
+		
+		System.out.println(r + "   rrrrrrrrrrrrrrr");
 		
 		Cytogenetique cytogenetique=new Cytogenetique(fiche2Dto.getCytogenetique().getLymphocytes(),fiche2Dto.getCytogenetique().getDateSang(),
 				fiche2Dto.getCytogenetique().getAgentPortant(),fiche2Dto.getCytogenetique().getInstabilite(),fiche2Dto.getCytogenetique().getInstabilitePourcentage(),

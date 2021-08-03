@@ -1,7 +1,5 @@
 package tn.mdweb.dsi.tfar.domain.dto;
 
-import javax.validation.constraints.NotEmpty;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,13 +15,10 @@ public class PatientDto {
 	
 	private Long idPatient;
 	
-	@NotEmpty
 	private String ndPatient;
 
-	@NotEmpty
 	private String nom;
 
-	@NotEmpty
 	private String prenom;
 
 	private Sexe sexe;

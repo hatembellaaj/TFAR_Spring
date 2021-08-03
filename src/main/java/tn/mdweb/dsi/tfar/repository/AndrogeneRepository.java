@@ -14,5 +14,8 @@ public interface AndrogeneRepository extends JpaRepository<Androgene, Long> {
 	@Query("DELETE FROM tn.mdweb.dsi.tfar.domain.entity.Androgene a WHERE a.fiche.idFiche= :idOfFiche ")
 	@Modifying
 	void DeleteAndrogeneByIdFiche(@Param("idOfFiche") Long idOfFiche);
+	
+	@Query("SELECT a FROM tn.mdweb.dsi.tfar.domain.entity.Androgene a WHERE a.fiche.idFiche = :idOfFiche") 
+	Androgene findAndrogeneByIdFiche(@Param("idOfFiche") Long idOfFiche);
 
 }

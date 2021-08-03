@@ -14,5 +14,8 @@ public interface CytogenetiqueRepository extends JpaRepository<Cytogenetique, Lo
 	@Query("DELETE FROM tn.mdweb.dsi.tfar.domain.entity.Cytogenetique c WHERE c.fiche.idFiche= :idOfFiche ")
 	@Modifying
 	void DeleteCytogenetiqueByIdFiche(@Param("idOfFiche") Long idOfFiche);
+	
+	@Query("SELECT c FROM tn.mdweb.dsi.tfar.domain.entity.Cytogenetique c WHERE c.fiche.idFiche = :idOfFiche") 
+	Cytogenetique findCytogenetiqueByIdFiche(@Param("idOfFiche") Long idOfFiche);
 
 }
