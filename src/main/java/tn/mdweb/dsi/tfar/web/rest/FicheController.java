@@ -51,13 +51,14 @@ public class FicheController {
 		@GetMapping("/find/{idFiche}")
 		public Fiche2Dto getFicheDtoById(@PathVariable(value = "idFiche") Long id) {
 			Fiche fiche = ficheService.get(id);
+			System.out.println("aaaaaaaaaaaaa "+ficheService.get(id)+"   ddddddddddd");
 			return fiche2Converter.FicheDtoToDFiche2Dto( ficheConverter.toDto(fiche));
 		}
 
 		// create ficheDto
 		@PostMapping("/save") 
-		public FicheDto save(@RequestBody Fiche2Dto fiche2Dto)  throws Exception{
-			return ficheConverter.toDto(ficheService.save(fiche2Dto));
+		public Fiche2Dto save(@RequestBody Fiche2Dto fiche2Dto)  throws Exception{
+			return fiche2Converter.FicheDtoToDFiche2Dto(ficheConverter.toDto(ficheService.save(fiche2Dto)));
 		}
 		
 
