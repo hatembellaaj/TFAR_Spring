@@ -62,14 +62,12 @@ public class FicheController {
 		}
 		
 
-		/*
+		
 		// update ficheDto
 		@PutMapping("/save/{idFiche}")
-		public FicheDto updateFiche(@RequestBody Fiche2Dto ficheDto, @PathVariable("idFiche") Long id) throws Exception{
-			Fiche2Dto ficheupdate = ficheDto;
-			ficheupdate.setIdFiche(id);
-			return ficheConverter.toDto(ficheService.save(ficheupdate));
-		}*/
+		public Fiche2Dto updateFiche(@RequestBody Fiche2Dto fiche2Dto,@PathVariable(value = "idFiche") Long id) throws Exception{
+			 return fiche2Converter.FicheDtoToDFiche2Dto(ficheConverter.toDto(ficheService.update(fiche2Dto)));
+		}
 		/*
 		// update ficheDto
 				@PutMapping("/save/{idFiche}")

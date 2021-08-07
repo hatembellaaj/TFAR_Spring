@@ -88,17 +88,7 @@ public class FicheService {
 
 		System.out.println(savedFiche + "    ffffffffffffffff");
 		
-		if (fiche2Dto.getPatient().getIdPatient()!=null) {
-			patient = new Patient(fiche2Dto.getPatient().getIdPatient(),fiche2Dto.getPatient().getNdPatient(), fiche2Dto.getPatient().getNom(),
-					fiche2Dto.getPatient().getPrenom(), fiche2Dto.getPatient().getSexe(),
-					fiche2Dto.getPatient().getDateNaissance(), fiche2Dto.getPatient().getLieuNaissance(),
-					fiche2Dto.getPatient().getAdresse(), fiche2Dto.getPatient().getReperes(),
-					fiche2Dto.getPatient().getGouvernorat(), fiche2Dto.getPatient().getTel(),
-					fiche2Dto.getPatient().getPrenomPere(), fiche2Dto.getPatient().getNomMere(),
-					fiche2Dto.getPatient().getPrenomMere(), fiche2Dto.getPatient().getNomGmp(),
-					fiche2Dto.getPatient().getNomGmm(), new Fiche(savedFiche.getIdFiche()));
-			
-		}else {
+		
 			
 			patient = new Patient(fiche2Dto.getPatient().getNdPatient(), fiche2Dto.getPatient().getNom(),
 					fiche2Dto.getPatient().getPrenom(), fiche2Dto.getPatient().getSexe(),
@@ -108,7 +98,7 @@ public class FicheService {
 					fiche2Dto.getPatient().getPrenomPere(), fiche2Dto.getPatient().getNomMere(),
 					fiche2Dto.getPatient().getPrenomMere(), fiche2Dto.getPatient().getNomGmp(),
 					fiche2Dto.getPatient().getNomGmm(), new Fiche(savedFiche.getIdFiche()));
-		}
+		
 
 		
 		
@@ -118,36 +108,22 @@ public class FicheService {
 		
 		System.out.println(r + "   rrrrrrrrrrrrrrr");
 		
-		if(fiche2Dto.getCytogenetique().getNetudeCyto()!=null) {
-			
-			cytogenetique=new Cytogenetique(fiche2Dto.getCytogenetique().getNetudeCyto(),fiche2Dto.getCytogenetique().getLymphocytes(),fiche2Dto.getCytogenetique().getDateSang(),
-					fiche2Dto.getCytogenetique().getAgentPortant(),fiche2Dto.getCytogenetique().getInstabilite(),fiche2Dto.getCytogenetique().getInstabilitePourcentage(),
-					fiche2Dto.getCytogenetique().getIr(),fiche2Dto.getCytogenetique().getIrPourcentage(),fiche2Dto.getCytogenetique().getMoelle(),
-					fiche2Dto.getCytogenetique().getDateMoelle(),fiche2Dto.getCytogenetique().getResultatMoelle(),new Laboratoire(fiche2Dto.getCytogenetique().getIdLaboratoire()),
-					new Fiche(savedFiche.getIdFiche()));
-			
-		}else {
+		
 			cytogenetique=new Cytogenetique(fiche2Dto.getCytogenetique().getLymphocytes(),fiche2Dto.getCytogenetique().getDateSang(),
 					fiche2Dto.getCytogenetique().getAgentPortant(),fiche2Dto.getCytogenetique().getInstabilite(),fiche2Dto.getCytogenetique().getInstabilitePourcentage(),
 					fiche2Dto.getCytogenetique().getIr(),fiche2Dto.getCytogenetique().getIrPourcentage(),fiche2Dto.getCytogenetique().getMoelle(),
 					fiche2Dto.getCytogenetique().getDateMoelle(),fiche2Dto.getCytogenetique().getResultatMoelle(),new Laboratoire(fiche2Dto.getCytogenetique().getIdLaboratoire()),
 					new Fiche(savedFiche.getIdFiche()));
 			
-		}
+		
 		
 		
 		
 		Cytogenetique c = cytogenetiqueRepository.save(cytogenetique);
 		
-		if(fiche2Dto.getAndrogene().getId()!=null) {
-			androgene=new Androgene(fiche2Dto.getAndrogene().getId(),fiche2Dto.getAndrogene().getMois(),fiche2Dto.getAndrogene().getReponse(),new Fiche(savedFiche.getIdFiche()));
-
-			
-		}else {
+		
 			androgene=new Androgene(fiche2Dto.getAndrogene().getMois(),fiche2Dto.getAndrogene().getReponse(),new Fiche(savedFiche.getIdFiche()));
 
-			
-		}
 		
 		
 		Androgene a = androgeneRepository.save(androgene);
@@ -166,5 +142,67 @@ public class FicheService {
 		androgeneRepository.DeleteAndrogeneByIdFiche(id);
 		ficheRepository.deleteById(id);
 	}
+    
+    public Fiche update(Fiche2Dto fiche2Dto) throws ValidationException {
+    	if ((fiche2Dto.getNdossierFiche() == null) || fiche2Dto.getDateDiagnostique() == null
+				|| fiche2Dto.getDateEnregistrement() == null || fiche2Dto.getPatient().getNdPatient() == null
+				|| fiche2Dto.getPatient().getNom() == null || fiche2Dto.getPatient().getPrenom() == null) {
+			throw new ValidationException(
+					"The ndossierFiche or DateDiagnostique Fiche or DateEnregistrement or ndpatient or "
+					+ "nom patient or prenom patient  are not found.");
+		}
+
+		Long codeUser = fiche2Dto.getCodeUser();
+		List<User> users = userRepository.findAll();
+		User x = users.stream().filter(h -> h.getCode().equals(codeUser)).findAny().orElse(null);
+		if (x == null) {
+			throw new ValidationException("The user is not found.");
+		}
+		
+		FicheDto ficheDto = fiche2Converter.Fiche2DtoToDFicheDto(fiche2Dto);
+		Fiche fiche = ficheConverter.toEntity(ficheDto);
+		fiche.setIdFiche(fiche2Dto.getIdFiche());
+		System.out.println("begin update fiche");
+		Fiche savedFiche = ficheRepository.save(fiche);
+		
+		System.out.println("end update fiche");
+		
+		patient = new Patient(fiche2Dto.getPatient().getIdPatient(),fiche2Dto.getPatient().getNdPatient(), fiche2Dto.getPatient().getNom(),
+				fiche2Dto.getPatient().getPrenom(), fiche2Dto.getPatient().getSexe(),
+				fiche2Dto.getPatient().getDateNaissance(), fiche2Dto.getPatient().getLieuNaissance(),
+				fiche2Dto.getPatient().getAdresse(), fiche2Dto.getPatient().getReperes(),
+				fiche2Dto.getPatient().getGouvernorat(), fiche2Dto.getPatient().getTel(),
+				fiche2Dto.getPatient().getPrenomPere(), fiche2Dto.getPatient().getNomMere(),
+				fiche2Dto.getPatient().getPrenomMere(), fiche2Dto.getPatient().getNomGmp(),
+				fiche2Dto.getPatient().getNomGmm(), new Fiche(savedFiche.getIdFiche()));
+		System.out.println("begin update patient");
+		Patient r = patientRepository.save(patient);
+		System.out.println("end update patient");
+		
+		System.out.println("eeeeeeeeeeeeeee"+fiche2Dto.getCytogenetique().getNetudeCyto());
+		cytogenetique=new Cytogenetique(fiche2Dto.getCytogenetique().getNetudeCyto(),fiche2Dto.getCytogenetique().getLymphocytes(),fiche2Dto.getCytogenetique().getDateSang(),
+				fiche2Dto.getCytogenetique().getAgentPortant(),fiche2Dto.getCytogenetique().getInstabilite(),fiche2Dto.getCytogenetique().getInstabilitePourcentage(),
+				fiche2Dto.getCytogenetique().getIr(),fiche2Dto.getCytogenetique().getIrPourcentage(),fiche2Dto.getCytogenetique().getMoelle(),
+				fiche2Dto.getCytogenetique().getDateMoelle(),fiche2Dto.getCytogenetique().getResultatMoelle(),new Laboratoire(fiche2Dto.getCytogenetique().getIdLaboratoire()),
+				new Fiche(savedFiche.getIdFiche()));
+		System.out.println("begin update cyto");
+		Cytogenetique c = cytogenetiqueRepository.save(cytogenetique);
+		System.out.println("end update cyto");
+		
+		androgene=new Androgene(fiche2Dto.getAndrogene().getId(),fiche2Dto.getAndrogene().getMois(),fiche2Dto.getAndrogene().getReponse(),new Fiche(savedFiche.getIdFiche()));
+
+		System.out.println("begin update andro");
+		Androgene a = androgeneRepository.save(androgene);
+		System.out.println("end update andro");
+		
+		return savedFiche;
+		
+		
+		
+		
+    	
+    }
+    
+    
 
 }
