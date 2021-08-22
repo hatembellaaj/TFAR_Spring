@@ -11,6 +11,8 @@ import tn.mdweb.dsi.tfar.repository.AndrogeneRepository;
 import tn.mdweb.dsi.tfar.repository.CytogenetiqueRepository;
 import tn.mdweb.dsi.tfar.repository.PatientRepository;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 
 @Component
@@ -46,8 +48,8 @@ public class Fiche2Converter {
 		
 		Long idOfFiche=ficheDto.getIdFiche();
 		PatientDto patientDto=patientConverter.entityToDto(patientRepository.findPatientByIdFiche(idOfFiche));
-		AndrogeneDto androgeneDto=androgeneConverter.entityToDto(androgeneRepository.findAndrogeneByIdFiche(idOfFiche));
-		CytogenetiqueDto cytogenetiqueDto=cytogenetiqueConverter.entityToDto(cytogenetiqueRepository.findCytogenetiqueByIdFiche(idOfFiche));
+		List<AndrogeneDto> androgeneDto=androgeneConverter.entityToDto(androgeneRepository.findAndrogeneByIdFiche(idOfFiche));
+		List<CytogenetiqueDto> cytogenetiqueDto=cytogenetiqueConverter.entityToDto(cytogenetiqueRepository.findCytogenetiqueByIdFiche(idOfFiche));
 		ModelMapper mapper = new ModelMapper();
 		Fiche2Dto map = mapper.map(ficheDto, Fiche2Dto.class);
 		map.setPatient(patientDto);

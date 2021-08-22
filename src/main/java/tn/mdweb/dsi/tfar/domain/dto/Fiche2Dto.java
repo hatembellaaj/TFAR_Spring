@@ -1,6 +1,7 @@
 package tn.mdweb.dsi.tfar.domain.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -417,13 +418,13 @@ public class Fiche2Dto {
 	
 	private PatientDto patient;
 	
-	private AndrogeneDto androgene;
+	private List<AndrogeneDto> androgene;
 	
 	private CousinDto cousin;
 	
 	private FrereDto frere;
 	
-	private CytogenetiqueDto cytogenetique;
+	private List<CytogenetiqueDto> cytogenetique;
 
 
 }

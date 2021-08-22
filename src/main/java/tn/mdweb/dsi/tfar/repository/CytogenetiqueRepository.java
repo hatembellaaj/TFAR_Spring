@@ -1,5 +1,7 @@
 package tn.mdweb.dsi.tfar.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,6 +18,7 @@ public interface CytogenetiqueRepository extends JpaRepository<Cytogenetique, Lo
 	void DeleteCytogenetiqueByIdFiche(@Param("idOfFiche") Long idOfFiche);
 	
 	@Query("SELECT c FROM tn.mdweb.dsi.tfar.domain.entity.Cytogenetique c WHERE c.fiche.idFiche = :idOfFiche") 
-	Cytogenetique findCytogenetiqueByIdFiche(@Param("idOfFiche") Long idOfFiche);
+	List<Cytogenetique> findCytogenetiqueByIdFiche(@Param("idOfFiche") Long idOfFiche);
+	
 
 }
