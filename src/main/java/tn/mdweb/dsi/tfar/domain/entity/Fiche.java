@@ -271,15 +271,12 @@ public class Fiche {
 	@Column(name = "hypochromique", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 hypochromique;
-
 	@Column(name = "empreinte_digitiforme", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 empreinteDigitiforme;*/
 	/*
-
 	@Column(name = "verge_insuf", length = 30)
 	private String vergeInsuf;
-
 	@Column(name = "autre_anom_verge", length = 30)
 	private String autreAnomVerge;*/
 
@@ -299,7 +296,6 @@ public class Fiche {
 	/*@Column(name = "anom_urin", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 anomUrin;
-
 	@Column(name = "type_anom_urin", length = 100)
 	private String typeAnomUrin;*/
 	
@@ -742,136 +738,102 @@ public class Fiche {
 /*
 	@Column(name = "radios_faites", length = 50)
 	private String radiosFaites;
-
 	@Column(name = "surnumerarie", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 surnumerarie;
-
 	@Column(name = "agenesie_pouce", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 agenesiePouce;
-
 	@Column(name = "hypoPouce", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 hypoPouce;
-
 	@Column(name = "aspectPouce", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 aspectPouce;
-
 	@Column(name = "hypo_eminence", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 hypoEminence;
-
 	@Column(name = "absence_radial", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 absenceRadial;
-
 	@Column(name = "pouce_bas", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 pouceBas;
-
 	@Column(name = "autre_anom_pouce", length = 50)
 	private String autreAnomPouce;
-
 	@Column(name = "anomalie_os", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 anomalieOs;
-
 	@Column(name = "autre_anomalie_membre_sup", length = 50)
 	private String autreAnomalieMembreSup;
-
 	@Column(name = "precise_anom_ort", length = 50)
 	private String preciseAnomOrt;
-
 	@Column(name = "lch", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 lch;
-
 	@Column(name = "autre_anomalie_membre_inf", length = 50)
 	private String autreAnomalieMembreInf;
-
 	@Column(name = "precise_anom_rac", length = 50)
 	private String preciseAnomRac;
-
 	@Column(name = "insulino_dep", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 insulinoDep;
-
 	@Column(name = "autre_endocrinopathie", length = 50)
 	private String autreEndocrinopathie;
-
 	@Column(name = "date_num_sanguine")
 	private Date dateNumSanguine;
-
 	@Column(name = "age")
 	private Long age;
 	
 	@Column(name = "morphologie_eryth", length = 11)
 	@Enumerated(EnumType.STRING)
 	private Enum5 morphologieEryth;
-
 	@Column(name = "morphologie_gran", length = 11)
 	@Enumerated(EnumType.STRING)
 	private Enum5 morphologieGran;
-
 	@Column(name = "morphologie_mega")
 	@Enumerated(EnumType.STRING)
 	private Enum5 morphologieMega;
-
 	@Column(name = "granuleux")
 	private Double granuleux;
-
 	@Column(name = "dysmyelopoiese", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 dysmyelopoiese;
-
 	@Column(name = "megacaryocytes", length = 10)
 	@Enumerated(EnumType.STRING)
 	private Enum4 megacaryocytes;
-
 	@Column(name = "blaste")
 	private Double blaste;
-
 	@Column(name = "exces_blastes", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 excesBlastes;
 	
 	@Column(name = "adipocytes")
 	private Double adipocytes;
-
 	@Column(name = "danatrol", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 danatrol;
 	
 	@Column(name = "dose_totale_irr")
 	private Double doseTotaleIrr;
-
 	@Column(name = "lam", length = 7)
 	@Enumerated(EnumType.STRING)
 	private Enum1 lam;
-
 	@Column(name = "critere_diag_LAM", length = 50)
 	private String critereDiagLAM;
-
 	@Column(name = "traitement_LAM", length = 50)
 	private String traitementLAM;
 	
 	@Column(name = "cause_deces", length = 50)
 	private String causeDeces;
-
 	@Column(name = "autre_cause_d", length = 300)
 	private String autreCauseD;
-
 	@Column(name = "code")
 	private Long code;
-
 	@Column(name = "date_MAJ")
 	private Date dateMAJ;
-
 	@Column(name = "nombre_tache_cafe")
 	private Long nombreTacheCafe;
-
 	@Column(name = "nombre_tache_hypo")
 	private Long nombreTacheHypo;*/
 

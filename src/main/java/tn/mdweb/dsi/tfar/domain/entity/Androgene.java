@@ -10,15 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import tn.mdweb.dsi.tfar.enumeration.Mois;
 import tn.mdweb.dsi.tfar.enumeration.Reponse;
 
 
@@ -38,10 +35,14 @@ public class Androgene {
 	@Column(name = "id")
 	private Long id;
 
+	/*
 	@NotNull
 	@Column(name = "mois", length = 15)
 	@Enumerated(EnumType.STRING)
-	private Mois mois;
+	private Mois mois;*/
+	
+	@Column(name = "mois")
+	private Long mois;
 
 	@Column(name = "reponse")
 	@Enumerated(EnumType.STRING)
@@ -51,11 +52,14 @@ public class Androgene {
 	@JoinColumn(name = "id_fiche", referencedColumnName = "id_fiche")
 	private Fiche fiche;
 
-	public Androgene(@NotNull Mois mois, Reponse reponse, Fiche fiche) {
+
+	public Androgene(Long mois, Reponse reponse, Fiche fiche) {
 		this.mois = mois;
 		this.reponse = reponse;
 		this.fiche = fiche;
 	}
+	
+	
 	
 	
 

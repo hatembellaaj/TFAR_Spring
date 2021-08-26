@@ -17,4 +17,11 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 	
 	@Query("SELECT p FROM tn.mdweb.dsi.tfar.domain.entity.Patient p WHERE p.fiche.idFiche = :idOfFiche") 
 	Patient findPatientByIdFiche(@Param("idOfFiche") Long idOfFiche);
+	
+	
+	@Query ("select count(p) FROM tn.mdweb.dsi.tfar.domain.entity.Patient p where p.sexe ='M'")
+    Long countMale();
+	
+	@Query ("select count(p) FROM tn.mdweb.dsi.tfar.domain.entity.Patient p where p.sexe ='F'")
+    Long countFemale();
 }

@@ -1,5 +1,6 @@
 package tn.mdweb.dsi.tfar.web.rest;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class FicheController {
 	
 	@Autowired
 	private FicheService ficheService;
+	
+	@Autowired
+	private FicheRepository ficheRepository;
 	
 	@Autowired
 	private FicheConverter ficheConverter;
@@ -85,6 +89,61 @@ public class FicheController {
 				Fiche existingfiche = ficheService.get(id);
 				ficheService.delete(id);
 				return existingfiche.toString() + " is deleted";
+			}
+			
+			@GetMapping("/statuiv")
+			public HashMap<String, Long> getnbreUIV() {
+				
+				Long nbreFaite=ficheRepository.countuivFaite();
+				Long nbreNonFaite=ficheRepository.countuivNonFaite();
+				Long nbreMoin1=ficheRepository.countuivMoin1();
+				Long nbreNP=ficheRepository.countuivNP();
+				
+				
+				
+				HashMap<String, Long> map=new HashMap<String, Long>();
+				map.put("Faite",  nbreFaite);
+				map.put("Nonfaite", nbreNonFaite );
+				map.put("Moin1",  nbreMoin1);
+				map.put("np",  nbreNP);
+				
+				return map;
+			}
+			
+			@GetMapping("/statcellularite")
+			public HashMap<String, Long> getnbreCellularite() {
+				
+				Long nbreNormale=ficheRepository.countcellulariteNormale();
+				Long nbreDiminuee=ficheRepository.countcellulariteDiminuee();
+				Long nbreMoin1=ficheRepository.countcellulariteMoin1();
+				Long nbreNP=ficheRepository.countcellulariteNP();
+				
+				
+				
+				HashMap<String, Long> map=new HashMap<String, Long>();
+				map.put("Normale",  nbreNormale);
+				map.put("Diminuee", nbreDiminuee );
+				map.put("Moin1",  nbreMoin1);
+				map.put("np",  nbreNP);
+				
+				return map;
+			}
+			
+			@GetMapping("/statmorphologie")
+			public HashMap<String, Long> getnbreMorphologie() {
+				
+				Long nbreNormale=ficheRepository.countmorphologieNormale();
+				Long nbreDysplasie=ficheRepository.countmorphologieDysplasie();
+				Long nbreMoin1=ficheRepository.countmorphologieMoin1();
+				
+				
+				
+				HashMap<String, Long> map=new HashMap<String, Long>();
+				map.put("Normale",  nbreNormale);
+				map.put("Dysplasie", nbreDysplasie );
+				map.put("Moin1",  nbreMoin1);
+				
+				return map;
 			}
 
 

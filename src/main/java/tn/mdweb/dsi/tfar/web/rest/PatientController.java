@@ -1,5 +1,6 @@
 package tn.mdweb.dsi.tfar.web.rest;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,16 @@ import tn.mdweb.dsi.tfar.domain.entity.Fiche;
 import tn.mdweb.dsi.tfar.domain.entity.Patient;
 import tn.mdweb.dsi.tfar.enumeration.Gouvernorat;
 import tn.mdweb.dsi.tfar.enumeration.Sexe;
+import tn.mdweb.dsi.tfar.repository.PatientRepository;
 import tn.mdweb.dsi.tfar.service.PatientService;
 
 
 @RestController
 @RequestMapping("/api/patients")
 public class PatientController {
+	
+	@Autowired
+	private PatientRepository patientRepository;
 
 	@Autowired
 	private PatientService patientService;
@@ -82,6 +87,18 @@ public class PatientController {
 			Patient existingpatient = patientService.get(id);
 			patientService.delete(id);
 			return existingpatient.toString() +  " is deleted";
+		}
+		
+		@GetMapping("/statSexe")
+		public HashMap<String, Long> getnbreMF() {
+			
+			Long nbreMale=patientRepository.countMale();
+			Long nbreFemale=patientRepository.countFemale();
+			
+			HashMap<String, Long> map=new HashMap<String, Long>();
+			map.put("Male",  nbreMale);
+			map.put("Female",  nbreFemale);
+			return map;
 		}
 
 }

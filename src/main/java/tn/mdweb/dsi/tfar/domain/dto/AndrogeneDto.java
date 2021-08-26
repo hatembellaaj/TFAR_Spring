@@ -15,7 +15,9 @@ public class AndrogeneDto {
 	
 	private Long id;
 
-	private Mois mois;
+	//private Mois mois;
+	
+	private Long mois;
 
 	private Reponse reponse;
 	
